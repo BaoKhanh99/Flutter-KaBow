@@ -6,11 +6,20 @@ class Searching_Page extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(200),
+        preferredSize: Size.fromHeight(100),
         child: AppBar(
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          title: Image.asset('assets/logo.png',height: 100,),
+            automaticallyImplyLeading: false, // hides leading widget
+            flexibleSpace: Container(
+              alignment: Alignment.center,
+              child: Image.asset('assets/logo.png',height: 70,),
+              margin: const EdgeInsets.only(top: 40),
+
+              //color: Colors.orange,
+
+            ) ,
+            backgroundColor: Colors.white,
+//          centerTitle: true,
+//          title: Image.asset('assets/logo.png',height: 100,)
         )
       ),
         body: Center(

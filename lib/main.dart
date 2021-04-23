@@ -1,16 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:community_material_icon/community_material_icon.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter/foundation.dart';
+import 'Search_Page/Searching_Page.dart';
+import 'Account_Page/Account_Page.dart';
+import 'Liked_Page/Liked_Page.dart';
+import 'Service_Page/Service_Page.dart';
+import 'Colors/ProjectColor.dart';
 
 void main() {
   runApp(MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'KaBow',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: PrimaryColor,
       ),
       home: MyHomePage(title: 'KaBow App'),
     );
@@ -27,56 +38,42 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   int _currentIndex = 0;
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
+  List<Widget> _listbtngbar = [
+    Searching_Page(),
+    Service_Page(),
+    Liked_Page(),
+    Acount_Page(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-
-
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'My name is Khanh',
-            ),
-          ],
-        ),
-      ),
+
+    body: _listbtngbar[_currentIndex],
      bottomNavigationBar: BottomNavigationBar(
 
        currentIndex: _currentIndex,
        type: BottomNavigationBarType.fixed,
        backgroundColor: Colors.white,
-      items: [
+       items: [
         BottomNavigationBarItem(
-          icon: Icon(Icons.search),
+          icon: Icon(FontAwesomeIcons.search),
           title: Text('Search'),
           backgroundColor: Colors.orange,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add_location),
-          title: Text('Near here'),
+          icon: Icon(FontAwesomeIcons.key),
+          title: Text('Reserve'),
 
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.favorite),
+          icon: Icon(FontAwesomeIcons.solidHeart),
           title: Text('Favorite'),
           backgroundColor: Colors.orange,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.account_circle),
+          icon: Icon(FontAwesomeIcons.solidUser),
           title: Text('Account'),
           backgroundColor: Colors.orange,
         ),

@@ -57,6 +57,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.15.0"
+  community_material_icon:
+    dependency: "direct dev"
+    description:
+      name: community_material_icon
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "5.9.55"
   crypto:
     dependency: transitive
     description:
@@ -102,6 +109,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  font_awesome_flutter:
+    dependency: "direct main"
+    description:
+      name: font_awesome_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "9.0.0"
   image:
     dependency: transitive
     description:

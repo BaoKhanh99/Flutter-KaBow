@@ -49,10 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
     body: _listbtngbar[_currentIndex],
      bottomNavigationBar: BottomNavigationBar(
-
        currentIndex: _currentIndex,
        type: BottomNavigationBarType.fixed,
        backgroundColor: Colors.white,

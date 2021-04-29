@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 
 
@@ -14,9 +15,25 @@ class Liked_Page extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Liked Page',
-            ),
+            Expanded(
+                child: SizedBox(
+                  height: 300,
+                  child: ListView(
+                    children: [
+                      ListTile(
+                        title: Text("data"),
+                      ),
+                      ListTile(
+                        title: Text("data"),
+                      ),
+                      ListTile(
+                        title: Text("data"),
+                      )
+                    ],
+                  ),
+                )
+
+            )
           ],
         ),
       ),

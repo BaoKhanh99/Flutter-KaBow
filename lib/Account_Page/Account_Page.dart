@@ -37,7 +37,7 @@ class Acount_Page extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  "Account",
+                  "TÀI KHOẢN",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -81,7 +81,7 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Profile",
+                      "TÀI KHOẢN",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
@@ -96,7 +96,7 @@ class Acount_Page extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("Change password"),
+                        title: Text("ĐỔI MẬT KHẨU"),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -122,7 +122,7 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Change Password",
+                      "ĐỎI MẬT KHẨU",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
@@ -137,7 +137,7 @@ class Acount_Page extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("Safe and Provicy"),
+                        title: Text("CHÍNH SÁCH BẢO MẬT"),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -163,7 +163,7 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Safe and Provicy",
+                      "CHÍNH SÁCH BẢO MẬT",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
@@ -178,7 +178,7 @@ class Acount_Page extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("ABCXYZ"),
+                        title: Text("THÔNG TIN PHÁP LÝ"),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
@@ -204,7 +204,7 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "ABCXYZ",
+                      "THÔNG TIN PHÁP LÝ",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
@@ -226,7 +226,7 @@ class Acount_Page extends StatelessWidget {
                   width: 7,
                 ),
                 Text(
-                  "Settings",
+                  "CÀI ĐẶT",
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
               ],
@@ -249,28 +249,129 @@ class Acount_Page extends StatelessWidget {
                 scale: 0.7,
                   child: CupertinoSwitch(value: true, onChanged: (bool val){})),
             ],),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "ABCXYZ",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.grey[600]),
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("NGÔN NGỮ"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],),
+                        actions: [
+                          FlatButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "NGÔN NGỮ",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Colors.grey[600],),
+                  ],
                 ),
-                Transform.scale(
-                    scale: 0.7,
-                    child: CupertinoSwitch(value: true, onChanged: (bool val){})),
-              ],),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  "MNLZA",
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500,color: Colors.grey[600]),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("TRỢ GIÚP"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],),
+                        actions: [
+                          FlatButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "TRỢ GIÚP",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Colors.grey[600],),
+                  ],
                 ),
-                Transform.scale(
-                    scale: 0.7,
-                    child: CupertinoSwitch(value: true, onChanged: (bool val){})),
-              ],),
+              ),
+            ),
+            GestureDetector(
+              onTap: (){
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("PHIÊN BẢN"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],),
+                        actions: [
+                          FlatButton(
+                            onPressed: (){
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "PHIÊN BẢN",
+                      style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Colors.grey[600],),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(height: 7,),
             Center(
               child: OutlineButton(

@@ -8,7 +8,7 @@ class Searching_Page extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(size.width*0.25),
+        preferredSize: Size.fromHeight(size.width*0.3),
         child: AppBar(
             automaticallyImplyLeading: false, // hides leading widget
             flexibleSpace: Column(
@@ -16,7 +16,9 @@ class Searching_Page extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  child: Image.asset('assets/logo.png',height: 70,),
+
+                  margin: EdgeInsets.only(top: size.height*0.03),
+                  child: Image.asset('assets/logo.png',height: size.height*0.1),
                 ),
               ],
             ) ,
@@ -35,7 +37,7 @@ class Searching_Page extends StatelessWidget {
                   child: Searching_form(),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: size.height*0.1),
+                  margin: EdgeInsets.only(top: size.height*0.05),
                   alignment: Alignment.topLeft,
                   child: Recommended(),
                 )

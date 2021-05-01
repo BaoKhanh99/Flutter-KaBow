@@ -1,13 +1,59 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Search_Page/SearchingListPage.dart';
 
 class Searching_form extends StatefulWidget {
   @override
   _SearchingState createState() => _SearchingState();
 }
 
+class Purpose {
+  int id;
+  String name;
+
+  Purpose(this.id, this.name);
+
+  static List<Purpose> getPurpose(){
+    return <Purpose>[
+      Purpose(1, "du lich"),
+      Purpose(2, "Dạo biển"),
+      Purpose(3, "tắm nắng"),
+      Purpose(4, "Thư giãn"),
+      Purpose(5, "Đi phượt"),
+      Purpose(6, "ahihi"),
+    ];
+  }
+}
+
 class _SearchingState extends State<Searching_form> {
+
+  List<Purpose> _purposes = Purpose.getPurpose();
+  List<DropdownMenuItem<Purpose>> _dropdownMenuItem;
+  Purpose _selectedPurpose;
+
+  @override
+  void initState() {
+    _dropdownMenuItem = buildDropdownMenuItem(_purposes);
+   //_selectedPurpose = _dropdownMenuItem[0].value;
+    
+  }
+
+  List<DropdownMenuItem<Purpose>> buildDropdownMenuItem(List purposes){
+    List<DropdownMenuItem<Purpose>> items = List();
+    for(Purpose purpose in purposes){
+      items.add(DropdownMenuItem(value: purpose, child: Text(purpose.name),),);
+
+    }
+    return items;
+  }
+
+  onChangeDropdownItem(Purpose selectedPurpose){
+    setState(() {
+    _selectedPurpose = selectedPurpose;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -54,26 +100,46 @@ class _SearchingState extends State<Searching_form> {
                         top: size.width * 0.03,
                         right: size.width * 0.02,
                         bottom: size.width * 0.03),
-                    width: 200,
                     child: Column(
                       children: [
-                        TextFormField(
-                          decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide:
-                                      BorderSide(color: PrimaryColor),
-                                  borderRadius: BorderRadius.circular(5)),
-                              hintText: "Mục đích",
-                              contentPadding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 8),
-                              hintStyle: TextStyle(
-                                  color: PrimaryColor.withOpacity(0.6),
-                                  fontSize: 14),
-                              filled: true,
-                              fillColor: BackgroundColor),
-                          style: TextStyle(fontSize: 18),
+//                        TextFormField(
+//                          decoration: InputDecoration(
+//                              border: OutlineInputBorder(
+//                                  borderSide:
+//                                      BorderSide(color: PrimaryColor),
+//                                  borderRadius: BorderRadius.circular(5)),
+//                              hintText: "Mục đích",
+//                              contentPadding: EdgeInsets.symmetric(
+//                                  horizontal: 10, vertical: 8),
+//                              hintStyle: TextStyle(
+//                                  color: PrimaryColor.withOpacity(0.6),
+//                                  fontSize: 14),
+//                              filled: true,
+//                              fillColor: BackgroundColor),
+//                          style: TextStyle(fontSize: 18),
+//                        ),
+                    Container(
+                      width: size.width*0.48,
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: BackgroundColor
+                      ),
+                      child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                        value: _selectedPurpose,
+                        items: _dropdownMenuItem,
+                        onChanged: onChangeDropdownItem,
+                        style: TextStyle(
+                          color: PrimaryColor,
+                          fontSize: 15,
                         ),
-                      ],
+                        hint: Text("hello"),
+                        dropdownColor: BackgroundColor,
+                      )
+                      ),
+                    ),
+            ],
                     ),
                   ),
                   Container(
@@ -100,6 +166,7 @@ class _SearchingState extends State<Searching_form> {
                   ),
                 ],
               ),
+
               Container(
                 width: size.width,
                 height: size.height * 0.05,
@@ -110,7 +177,9 @@ class _SearchingState extends State<Searching_form> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(5)))),
                     onPressed: () {
-                      print("hello");
+                     String a = _selectedPurpose?.name ?? "concac";
+                        print(a);
+                      //Navigator.push(context, MaterialPageRoute(builder: (context) => SearchingListPage()));
                     },
                     child: Text(
                       "Tìm kiếm",

@@ -4,8 +4,11 @@ import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Search_Page/SearchingListPage.dart';
 
 class Searching_form extends StatefulWidget {
+  String namePage;
+  Searching_form({this.namePage});
+  //Searching_form({Key key, @required this.namePage}) : super(key: key);
   @override
-  _SearchingState createState() => _SearchingState();
+  _SearchingState createState() => _SearchingState(namePage: namePage);
 }
 
 class Purpose {
@@ -13,8 +16,7 @@ class Purpose {
   String name;
 
   Purpose(this.id, this.name);
-
-  static List<Purpose> getPurpose(){
+  static List<Purpose> getPurpose() {
     return <Purpose>[
       Purpose(1, "du lich"),
       Purpose(2, "Dạo biển"),
@@ -27,6 +29,8 @@ class Purpose {
 }
 
 class _SearchingState extends State<Searching_form> {
+  String namePage;
+  _SearchingState({@required this.namePage});
 
   List<Purpose> _purposes = Purpose.getPurpose();
   List<DropdownMenuItem<Purpose>> _dropdownMenuItem;
@@ -35,22 +39,25 @@ class _SearchingState extends State<Searching_form> {
   @override
   void initState() {
     _dropdownMenuItem = buildDropdownMenuItem(_purposes);
-   //_selectedPurpose = _dropdownMenuItem[0].value;
-    
+    //_selectedPurpose = _dropdownMenuItem[0].value;
   }
 
-  List<DropdownMenuItem<Purpose>> buildDropdownMenuItem(List purposes){
+  List<DropdownMenuItem<Purpose>> buildDropdownMenuItem(List purposes) {
     List<DropdownMenuItem<Purpose>> items = List();
-    for(Purpose purpose in purposes){
-      items.add(DropdownMenuItem(value: purpose, child: Text(purpose.name),),);
-
+    for (Purpose purpose in purposes) {
+      items.add(
+        DropdownMenuItem(
+          value: purpose,
+          child: Text(purpose.name),
+        ),
+      );
     }
     return items;
   }
 
-  onChangeDropdownItem(Purpose selectedPurpose){
+  onChangeDropdownItem(Purpose selectedPurpose) {
     setState(() {
-    _selectedPurpose = selectedPurpose;
+      _selectedPurpose = selectedPurpose;
     });
   }
 
@@ -82,8 +89,7 @@ class _SearchingState extends State<Searching_form> {
                         borderRadius: BorderRadius.circular(5),
                         borderSide: BorderSide(
                           color: PrimaryColor,
-                        )
-                    ),
+                        )),
                     hintText: "Địa điểm...",
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 10, vertical: 0),
@@ -118,28 +124,26 @@ class _SearchingState extends State<Searching_form> {
 //                              fillColor: BackgroundColor),
 //                          style: TextStyle(fontSize: 18),
 //                        ),
-                    Container(
-                      width: size.width*0.48,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: BackgroundColor
-                      ),
-                      child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                        value: _selectedPurpose,
-                        items: _dropdownMenuItem,
-                        onChanged: onChangeDropdownItem,
-                        style: TextStyle(
-                          color: PrimaryColor,
-                          fontSize: 15,
+                        Container(
+                          width: size.width * 0.48,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              color: BackgroundColor),
+                          child: DropdownButtonHideUnderline(
+                              child: DropdownButton(
+                            value: _selectedPurpose,
+                            items: _dropdownMenuItem,
+                            onChanged: onChangeDropdownItem,
+                            style: TextStyle(
+                              color: PrimaryColor,
+                              fontSize: 15,
+                            ),
+                            hint: Text("hello"),
+                            dropdownColor: BackgroundColor,
+                          )),
                         ),
-                        hint: Text("hello"),
-                        dropdownColor: BackgroundColor,
-                      )
-                      ),
-                    ),
-            ],
+                      ],
                     ),
                   ),
                   Container(
@@ -166,7 +170,6 @@ class _SearchingState extends State<Searching_form> {
                   ),
                 ],
               ),
-
               Container(
                 width: size.width,
                 height: size.height * 0.05,
@@ -177,9 +180,16 @@ class _SearchingState extends State<Searching_form> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(5)))),
                     onPressed: () {
-                     String a = _selectedPurpose?.name ?? "concac";
-                        print(a);
-                      //Navigator.push(context, MaterialPageRoute(builder: (context) => SearchingListPage()));
+                      String a = _selectedPurpose?.name ??
+                          "concac"; //kiem tra ng dung da nhap muc dich chua
+                      if (namePage == "Searching_Page") {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SearchingListPage()));
+                      } else {
+                        print("don't fucking change");
+                      }
                     },
                     child: Text(
                       "Tìm kiếm",

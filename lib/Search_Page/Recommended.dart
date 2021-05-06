@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Search_Page/LocationItem.dart';
+import 'package:kabow/Search_Page/LocationPage.dart';
 
 class Recommended extends StatefulWidget {
   @override
@@ -15,16 +17,13 @@ class _RecommendedState extends State<Recommended> {
     return Container(
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-          color: BackgroundColor,
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 1,
-                blurRadius: 4,
-                offset: Offset(1, 2))
-          ])
-      ,
+      decoration: BoxDecoration(color: BackgroundColor, boxShadow: [
+        BoxShadow(
+            color: Colors.grey.withOpacity(0.5),
+            spreadRadius: 1,
+            blurRadius: 4,
+            offset: Offset(1, 2))
+      ]),
       child: Material(
         type: MaterialType.transparency,
         //elevation: 6.0,
@@ -33,12 +32,14 @@ class _RecommendedState extends State<Recommended> {
         child: InkWell(
           onTap: () {
             print("aaaa");
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => LocationPage()));
           },
           child: Column(
             children: [
               Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height*0.14,
+                  height: MediaQuery.of(context).size.height * 0.14,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
                       image: ExactAssetImage('assets/Images/location/bana.jpg'),
@@ -95,7 +96,8 @@ class TitleRecommended extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Padding(
-      padding: EdgeInsets.only(top: size.height*0.05, bottom: size.height*0.01),
+      padding:
+          EdgeInsets.only(top: size.height * 0.05, bottom: size.height * 0.01),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -150,48 +152,42 @@ class _ButtonLoginState extends State<ButtonLogin> {
     Size size = MediaQuery.of(context).size;
     return Container(
       //padding: EdgeInsets.only(top: size.height*0.07, bottom: size.height*0.1),
-      child: Stack(
-        alignment: Alignment.center,
-          children:[
-
-          Container(
-              width: size.width*0.85,
-              height: size.height*0.2,
-              child:
-              Image.asset('assets/Images/location/bana.jpg', fit: BoxFit.fitWidth,)
-          ),
-            Align(
-              alignment: Alignment.center,
-              child:
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  //crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Container(
-                      alignment: Alignment.center,
-                      child: FlatButton(
-                        height: 35,
-                        color: PrimaryColor2,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6)
-                        ),
-                      onPressed: ()=> print("hello"),
-                      child: Text("Đăng nhập",
-                        style: TextStyle(color: BackgroundColor,
-                          fontSize: 28
-                        ),
+      child: Stack(alignment: Alignment.center, children: [
+        Container(
+            width: size.width * 0.85,
+            height: size.height * 0.2,
+            child: Image.asset(
+              'assets/Images/location/bana.jpg',
+              fit: BoxFit.fitWidth,
+            )),
+        Align(
+            alignment: Alignment.center,
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                //crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    alignment: Alignment.center,
+                    child: FlatButton(
+                      height: 35,
+                      color: PrimaryColor2,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6)),
+                      onPressed: () => print("hello"),
+                      child: Text(
+                        "Đăng nhập",
+                        style: TextStyle(color: BackgroundColor, fontSize: 28),
                       ),
-                  ),
                     ),
-                    Container(
-                      alignment: Alignment.center,
-                      child: Text("Để có thêm nhiều tính năng",style: TextStyle(color: Colors.white, fontSize: 15), ),
-                      ),
-
-                ])
-            ),
-        ]
-      ),
+                  ),
+                  Container(
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Để có thêm nhiều tính năng",
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
+                  ),
+                ])),
+      ]),
     );
   }
 }

@@ -139,7 +139,7 @@ class _SearchingState extends State<Searching_form> {
                               color: PrimaryColor,
                               fontSize: 15,
                             ),
-                            hint: Text("hello"),
+                            hint: Text("Mục đích"),
                             dropdownColor: BackgroundColor,
                           )),
                         ),

@@ -1,34 +1,33 @@
 {
   "project_info": {
-    "project_number": "748082624816",
-    "firebase_url": "https://dulich-b19cc-default-rtdb.firebaseio.com",
-    "project_id": "dulich-b19cc",
-    "storage_bucket": "dulich-b19cc.appspot.com"
+    "project_number": "941782885523",
+    "project_id": "kabow-260ae",
+    "storage_bucket": "kabow-260ae.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:748082624816:android:251bb0066d0d36b4d1f0f5",
+        "mobilesdk_app_id": "1:941782885523:android:67ea31b532fa0c1fb3d966",
         "android_client_info": {
-          "package_name": "com.android.application"
+          "package_name": "com.bk.kabow"
         }
       },
       "oauth_client": [
         {
-          "client_id": "748082624816-30mh6m61vtdf63ml0gj2bol0g318vjtc.apps.googleusercontent.com",
+          "client_id": "941782885523-m0g69av8vvdqm323i265pghno4fh652q.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAC6tRAme62yBvFNsPKs-M0JfNEIoWS4Qc"
+          "current_key": "AIzaSyCWlJUJ9fVij3TIbcrpfYHc24lgQ3LAEgw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "748082624816-30mh6m61vtdf63ml0gj2bol0g318vjtc.apps.googleusercontent.com",
+              "client_id": "941782885523-m0g69av8vvdqm323i265pghno4fh652q.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

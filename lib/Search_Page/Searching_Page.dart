@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Search_Page/Recommended.dart';
 import 'package:kabow/Search_Page/Searching_form.dart';
+import 'package:kabow/providers/LocationProvider.dart';
+import 'package:provider/provider.dart';
 
-class Searching_Page extends StatelessWidget {
+class SearchingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    //List<String> images = ["https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any", "https://placeimg.com/500/500/any"];
     String namePage = context.widget.toStringShort();
     Size size = MediaQuery.of(context).size;
+    final locationProvider = Provider.of<LocationProvider>(context);
+
     return Scaffold(
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(size.width * 0.3),
@@ -37,16 +41,31 @@ class Searching_Page extends StatelessWidget {
           SliverToBoxAdapter(
             child: TitleRecommended(),
           ),
-          SliverGrid(
-              delegate: SliverChildBuilderDelegate((context, index) {
-                return Recommended();
-              }, childCount: 20),
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisSpacing: 1,
-                crossAxisCount: 2,
-                childAspectRatio: 1,
-                mainAxisSpacing: 1,
-              )),
+          StreamBuilder<List<Location>>(
+              stream: locationProvider.locations,
+              builder: (context, snapshot) {
+                //QuerySnapshot values = snapshot.data;
+                if (!snapshot.hasData) {
+                  print(snapshot.error);
+                  return SliverToBoxAdapter(
+                    child: Text("no data ${snapshot.error}"),
+                  );
+                } else {
+                  return SliverGrid(
+                      delegate: SliverChildBuilderDelegate((context, index) {
+                        //print('$snapshot.data');
+                        return Recommended(
+                          location: snapshot.data[index],
+                        );
+                      }, childCount: 6),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisSpacing: 1,
+                        crossAxisCount: 2,
+                        childAspectRatio: 1,
+                        mainAxisSpacing: 1,
+                      ));
+                }
+              }),
           SliverToBoxAdapter(
             child: ButtonLogin(),
           )

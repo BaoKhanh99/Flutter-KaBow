@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
-import 'package:kabow/Search_Page/Searching_form.dart';
 
 class Liked_Page extends StatelessWidget {
   @override

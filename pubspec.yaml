@@ -30,6 +30,11 @@ dependencies:
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^9.0.0
   carousel_pro: ^1.0.0
+  firebase_core: ^1.1.0
+  cloud_firestore:
+  provider: ^5.0.0
+  uuid: ^3.0.4
+  firebase_storage: ^8.0.6
 
 dev_dependencies:
   flutter_test:

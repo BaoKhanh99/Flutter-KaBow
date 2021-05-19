@@ -1,11 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
 import 'package:kabow/Search_Page/LocationPage.dart';
+import 'package:kabow/providers/LocationProvider.dart';
+import 'package:provider/provider.dart';
 
 class Recommended extends StatefulWidget {
+  final Location location;
+  Recommended({
+    this.location,
+  });
+
   @override
   _RecommendedState createState() => _RecommendedState();
 }
@@ -14,6 +21,7 @@ class _RecommendedState extends State<Recommended> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    //final locationProvider = Provider.of<LocationProvider>(context);
     return Container(
       alignment: Alignment.topCenter,
       margin: EdgeInsets.all(10),
@@ -42,7 +50,7 @@ class _RecommendedState extends State<Recommended> {
                   height: MediaQuery.of(context).size.height * 0.14,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
-                      image: ExactAssetImage('assets/Images/location/bana.jpg'),
+                      image: NetworkImage(widget.location.thumbnail),
                       fit: BoxFit.fitHeight,
                     ),
                   )),
@@ -55,7 +63,7 @@ class _RecommendedState extends State<Recommended> {
                     margin: EdgeInsets.only(
                         top: size.height * 0.006, bottom: size.height * 0.007),
                     child: Text(
-                      "Bà Nà",
+                      widget.location.title,
                       style: TextStyle(
                           color: PrimaryColor,
                           fontSize: 20,
@@ -76,7 +84,7 @@ class _RecommendedState extends State<Recommended> {
                             color: PrimaryColor2,
                           ),
                           Text(
-                            "Đà Nẵng",
+                            widget.location.province,
                             style: TextStyle(fontSize: 14, color: PrimaryColor),
                           )
                         ],

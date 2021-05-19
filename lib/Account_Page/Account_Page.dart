@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 
 
 class Acount_Page extends StatelessWidget {
@@ -20,10 +21,6 @@ class Acount_Page extends StatelessWidget {
         ),
         child: ListView(
           children: [
-            Text(
-              "PAGE",
-              style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
-            ),
             SizedBox(
               height: 30,
             ),
@@ -31,7 +28,7 @@ class Acount_Page extends StatelessWidget {
               children: [
                 Icon(
                   Icons.person,
-                  color: Colors.blue,
+                  color: Color(0xff1b2536),
                 ),
                 SizedBox(
                   width: 7,
@@ -45,35 +42,14 @@ class Acount_Page extends StatelessWidget {
             Divider(
               height: 15,
               thickness:2,
+              color: Color(0xff1b2536) ,
             ),
             SizedBox(
               height: 10,
             ),
             GestureDetector(
               onTap: (){
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: Text("Profile 1"),
-                    content: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text("OP1"),
-                        Text("OP2"),
-                        Text("OP3"),
-                        Text("OP4"),
-                    ],),
-                    actions: [
-                      FlatButton(
-                        onPressed: (){
-                          Navigator.of(context).pop();
-                      },
-                        child: Text("Close"),
-                      ),
-                    ],
-                  );
-                });
+                Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => ProfileEdit_page()  ));
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -81,15 +57,17 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "TÀI KHOẢN",
+                      "THÔNG TIN TÀI KHOẢN",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
             ),
+
+
             GestureDetector(
               onTap: (){
                 showDialog(
@@ -122,11 +100,11 @@ class Acount_Page extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "ĐỎI MẬT KHẨU",
+                      "ĐỔI MẬT KHẨU",
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -167,7 +145,7 @@ class Acount_Page extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -208,7 +186,7 @@ class Acount_Page extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -219,8 +197,8 @@ class Acount_Page extends StatelessWidget {
             Row(
               children: [
                 Icon(
-                  Icons.widgets,
-                  color: Colors.blue,
+                  Icons.settings,
+                  color: Color(0xff1b2536),
                 ),
                 SizedBox(
                   width: 7,
@@ -234,6 +212,7 @@ class Acount_Page extends StatelessWidget {
             Divider(
               height: 15,
               thickness:2,
+              color: Color(0xff1b2536),
             ),
             SizedBox(
               height: 10,
@@ -247,7 +226,7 @@ class Acount_Page extends StatelessWidget {
               ),
               Transform.scale(
                 scale: 0.7,
-                  child: CupertinoSwitch(value: true, onChanged: (bool val){})),
+                  child: CupertinoSwitch(value: true,activeColor: Color(0xff1b2536), onChanged: (bool val){})),
             ],),
             GestureDetector(
               onTap: (){
@@ -285,7 +264,7 @@ class Acount_Page extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -326,7 +305,7 @@ class Acount_Page extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -338,14 +317,7 @@ class Acount_Page extends StatelessWidget {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: Text("PHIÊN BẢN"),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("OP1"),
-                            Text("OP2"),
-                            Text("OP3"),
-                            Text("OP4"),
-                          ],),
+                        content: Text("Phiên bản XXXXX"),
                         actions: [
                           FlatButton(
                             onPressed: (){
@@ -367,7 +339,7 @@ class Acount_Page extends StatelessWidget {
                       style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500, color: Colors.grey[600]),),
                     Icon(
                       Icons.arrow_forward,
-                      color: Colors.grey[600],),
+                      color: Color(0xff1b2536),),
                   ],
                 ),
               ),
@@ -380,7 +352,7 @@ class Acount_Page extends StatelessWidget {
                 onPressed: (){},
               child: Text(
                   "SIGN OUT",
-                style: TextStyle(fontSize: 16,letterSpacing: 2.2,color: Colors.black) ,),
+                style: TextStyle(fontSize: 16,letterSpacing: 2.2,color: Color(0xff1b2536)) ,),
               ),
             ),
           ],

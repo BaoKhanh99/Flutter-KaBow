@@ -1,12 +1,18 @@
 import 'dart:ui';
-import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Search_Page/CommentLocationPage.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+import 'package:carousel_slider/carousel_slider.dart';
 
 class LocationPage extends StatefulWidget {
-  LocationPage({Key key}) : super(key: key);
+  final Location location;
+  List<String> a = [];
+  LocationPage({this.location});
+  //LocationPage({Key key}) : super(key: key);
 
   @override
   _LocationPageState createState() => _LocationPageState();
@@ -26,7 +32,7 @@ class _LocationPageState extends State<LocationPage> {
       child: CustomScrollView(
         slivers: [
           SliverAppBar(
-            title: Text("title"),
+            title: Text("${widget.location.title}"),
             actions: [
               PopupMenuButton(itemBuilder: (context) {
                 return <PopupMenuEntry>[
@@ -109,40 +115,20 @@ class _LocationPageState extends State<LocationPage> {
           )),
           SliverToBoxAdapter(
               child: Container(
-            height: 250,
-            width: size.width,
-            child: Carousel(
-              dotSize: 5,
-              dotBgColor: Colors.transparent,
-              //animationDuration: Duration.(milliseconds: 300),
-              autoplay: false,
-              autoplayDuration: Duration.zero,
-              images: [
-                Image.asset(
-                  "assets/Images/location/bana.jpg",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "assets/Images/location/bana.jpg",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "assets/Images/location/bana.jpg",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "assets/Images/location/bana.jpg",
-                  fit: BoxFit.cover,
-                ),
-              ],
-            ),
+                  height: 250,
+                  width: size.width,
+                  child: ImageCarousel(
+                    images: widget.location.images,
+                  ))),
+          SliverToBoxAdapter(
+              child: LocationInformation(
+            location: widget.location,
           )),
-          SliverToBoxAdapter(child: LocationInformation()),
           SliverToBoxAdapter(
             child: Container(
               padding: EdgeInsets.all(10),
               child: Text(
-                "Địa điểm ở quanh",
+                "Địa điểm xung quanh",
                 style: TextStyle(
                     color: PrimaryColor,
                     fontSize: 25,
@@ -196,8 +182,48 @@ class _LocationPageState extends State<LocationPage> {
   }
 }
 
+class ImageCarousel extends StatefulWidget {
+  List images;
+  ImageCarousel({this.images});
+
+  @override
+  _ImageCarouselState createState() => _ImageCarouselState();
+}
+
+class _ImageCarouselState extends State<ImageCarousel> {
+  @override
+  Widget build(BuildContext context) {
+    return Carousel(
+      dotSize: 5,
+      dotBgColor: Colors.transparent,
+      //animationDuration: Duration.(milliseconds: 300),
+      autoplay: false,
+      autoplayDuration: Duration.zero,
+      images: [
+        Image.network(
+          widget.images[0],
+          //"assets/Images/location/bana.jpg",
+          fit: BoxFit.cover,
+        ),
+        Image.network(
+          widget.images[1],
+          fit: BoxFit.cover,
+        ),
+        Image.network(
+          widget.images[2],
+          fit: BoxFit.cover,
+        ),
+      ],
+    );
+  }
+}
+
+// ignore: must_be_immutable
 class LocationInformation extends StatelessWidget {
-  const LocationInformation({Key key}) : super(key: key);
+  Location location;
+
+  LocationInformation({this.location});
+  //const LocationInformation({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -217,9 +243,9 @@ class LocationInformation extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(top: 8),
             child: Text(
-              "Đây là thông tin chi tiết về địa điểm",
+              "${location.detail}",
               style: TextStyle(
-                fontSize: 15,
+                fontSize: 17,
               ),
             ),
           ),
@@ -236,9 +262,9 @@ class LocationInformation extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "Đây là thông tin địa chỉ",
+                    "${location.province}",
                     style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 17,
                       //fontWeight: FontWeight.bold,
                     ),
                   )

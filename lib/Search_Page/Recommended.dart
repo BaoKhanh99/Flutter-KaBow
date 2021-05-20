@@ -39,9 +39,12 @@ class _RecommendedState extends State<Recommended> {
         shadowColor: Colors.grey[50],
         child: InkWell(
           onTap: () {
-            print("aaaa");
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => LocationPage()));
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => LocationPage(
+                          location: widget.location,
+                        )));
           },
           child: Column(
             children: [

@@ -10,9 +10,9 @@ class LocationProvider with ChangeNotifier {
   String _detail;
   String _thumbnail;
   String _province;
-  //sList _purposes;
-  int _numberPeople;
-  String _locationId;
+  String _imageId;
+  List _images;
+  //int _numberPeople;
   var uuid = Uuid();
 
   //Getters
@@ -21,23 +21,21 @@ class LocationProvider with ChangeNotifier {
   String get detail => _detail;
   String get thumbnail => _thumbnail;
   String get province => _province;
-  //List get purposes => _purposes;
-  int get numberPeople => _numberPeople;
+  List get images => _images;
+  //int get numberPeople => _numberPeople;
+  String get imageId => _imageId;
 
   Stream<List<Location>> get locations => firestoreService.getLocation();
 
   //Functions
   loadAll(Location location) {
     if (location != null) {
-      // _date = DateTime.parse(entry.date);
-      // _entry =entry.entry;
-      // _entryId = entry.entryId;
-
       _title = location.title;
       _detail = location.detail;
       _province = location.province;
       _thumbnail = location.thumbnail;
-      //_purposes = location.purposes;
+      _imageId = location.imageId;
+      _images = location.images;
       //_numberPeople = location.numberPeople;
     } else {
       print("opp...");

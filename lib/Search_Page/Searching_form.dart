@@ -36,8 +36,21 @@ class _SearchingState extends State<Searching_form> {
   List<DropdownMenuItem<Purpose>> _dropdownMenuItem;
   Purpose _selectedPurpose;
 
+  final addressTf = TextEditingController();
+  final numberPeopleTf = TextEditingController();
+  String purposeBtn;
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is disposed.
+    addressTf.dispose();
+    numberPeopleTf.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
+    //myController.text = "aaaaaa";
     _dropdownMenuItem = buildDropdownMenuItem(_purposes);
     //_selectedPurpose = _dropdownMenuItem[0].value;
   }
@@ -57,7 +70,9 @@ class _SearchingState extends State<Searching_form> {
 
   onChangeDropdownItem(Purpose selectedPurpose) {
     setState(() {
+      purposeBtn = selectedPurpose.name;
       _selectedPurpose = selectedPurpose;
+      print(purposeBtn);
     });
   }
 
@@ -97,6 +112,7 @@ class _SearchingState extends State<Searching_form> {
                     filled: true,
                     fillColor: BackgroundColor),
                 style: TextStyle(fontSize: 15),
+                controller: addressTf,
               ),
               Row(
                 children: [
@@ -164,6 +180,7 @@ class _SearchingState extends State<Searching_form> {
                               filled: true,
                               fillColor: BackgroundColor),
                           style: TextStyle(fontSize: 15),
+                          controller: numberPeopleTf,
                         ),
                       ],
                     ),
@@ -180,17 +197,32 @@ class _SearchingState extends State<Searching_form> {
                             borderRadius:
                                 BorderRadius.all(Radius.circular(5)))),
                     onPressed: () {
-                      String a = _selectedPurpose?.name ??
-                          "concac"; //kiem tra ng dung da nhap muc dich chua
-                      if (namePage == "Searching_Page") {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => SearchingListPage()));
+                      String checkPurpose = _selectedPurpose?.name ?? null;
+                      String checkAddress = addressTf.text ?? null;
+                      int checkNumberPeople =
+                          int.tryParse(numberPeopleTf.text) ?? null;
+                      if (checkAddress.isEmpty ||
+                          checkPurpose.isEmpty ||
+                          checkNumberPeople == null) {
+                        //print("ddrr");
                       } else {
-                        print("don't fucking change");
+                        if (namePage == "SearchingPage") {
+                          //print("$checkAddress");
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchingListPage(
+                                        address: checkAddress,
+                                        purpose: checkPurpose,
+                                        numberPeople: checkNumberPeople,
+                                      )));
+                        } else {
+                          print("don't fucking change");
+                        }
                       }
-                    },
+                    }
+                    //kiem tra ng dung da nhap muc dich chua
+                    ,
                     child: Text(
                       "Tìm kiếm",
                       style: TextStyle(color: BackgroundColor),

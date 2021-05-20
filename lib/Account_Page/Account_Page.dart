@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 
 class Acount_Page extends StatelessWidget {
+  bool _canShowButton = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -115,100 +116,7 @@ class Acount_Page extends StatelessWidget {
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("CHÍNH SÁCH BẢO MẬT"),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("OP1"),
-                            Text("OP2"),
-                            Text("OP3"),
-                            Text("OP4"),
-                          ],
-                        ),
-                        actions: [
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Close"),
-                          ),
-                        ],
-                      );
-                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "CHÍNH SÁCH BẢO MẬT",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xff1b2536),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            GestureDetector(
-              onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("THÔNG TIN PHÁP LÝ"),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("OP1"),
-                            Text("OP2"),
-                            Text("OP3"),
-                            Text("OP4"),
-                          ],
-                        ),
-                        actions: [
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Close"),
-                          ),
-                        ],
-                      );
-                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "THÔNG TIN PHÁP LÝ",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xff1b2536),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+
             SizedBox(
               height: 30,
             ),
@@ -386,6 +294,100 @@ class Acount_Page extends StatelessWidget {
                 ),
               ),
             ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("CHÍNH SÁCH BẢO MẬT"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],
+                        ),
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "CHÍNH SÁCH BẢO MẬT",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[600]),
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Color(0xff1b2536),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("THÔNG TIN PHÁP LÝ"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],
+                        ),
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "THÔNG TIN PHÁP LÝ",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.grey[600]),
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Color(0xff1b2536),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(
               height: 7,
             ),
@@ -395,7 +397,8 @@ class Acount_Page extends StatelessWidget {
                  padding: EdgeInsets.symmetric(horizontal: 40),
                  shape: RoundedRectangleBorder(
                      borderRadius: BorderRadius.circular(20)),
-                 onPressed: () {},
+                 onPressed: () {
+                 },
                  child: Text(
                    "SIGN OUT",
                    style: TextStyle(

@@ -390,19 +390,26 @@ class Acount_Page extends StatelessWidget {
               height: 7,
             ),
             Center(
-              child: OutlineButton(
-                padding: EdgeInsets.symmetric(horizontal: 40),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20)),
-                onPressed: () {},
-                child: Text(
-                  "SIGN OUT",
-                  style: TextStyle(
-                      fontSize: 16,
-                      letterSpacing: 2.2,
-                      color: Color(0xff1b2536)),
-                ),
-              ),
+              child: RaisedButton(
+//                 color: Color(0xff1b2536),
+//                 padding: EdgeInsets.symmetric(horizontal: 40),
+//                 shape: RoundedRectangleBorder(
+//                     borderRadius: BorderRadius.circular(20)),
+//                 onPressed: () {},
+//                 child: Text(
+//                   "SIGN OUT",
+// <<<<<<< HEAD
+//                   style: TextStyle(
+//                       fontSize: 16,
+//                       letterSpacing: 2.2,
+//                       color: Color(0xff1b2536)),
+//                 ),
+// =======
+//                 style: TextStyle(
+//                     fontSize: 16,
+//                     letterSpacing: 2.2,
+//                     color: Colors.white) ,),
+                  ),
             ),
           ],
         ),

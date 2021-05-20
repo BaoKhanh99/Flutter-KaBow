@@ -1,3 +1,4 @@
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/Account_Page.dart';
@@ -30,44 +31,76 @@ class ProfileEdit_page extends StatelessWidget{
           },
           child: ListView(
             children: [
+              SizedBox(
+                height: 10,
+              ),
+              Center(
+                child: Stack(
+                  children: [
+                    Container(
+                      width: 130,
+                      height: 130,
+                      decoration:  BoxDecoration(
+                        border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            color: Colors.black.withOpacity(0.1),
+                            offset: Offset(0,10),
+                          )
+                        ],
+                        shape: BoxShape.circle,
+                        image:  DecorationImage(
+                          image: AssetImage('assets/Images/meo4.jpg'),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                        right: 0,
+                        child: Container(
+                      height: 35,
+                      width: 35,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          width: 4,
+                          color: Theme.of(context).scaffoldBackgroundColor
+                        ),
+                        color: Color(0xff1b2536),
+                      ),
+                      child: Icon(
+                        Icons.edit,
+                        color: Colors.white,),
+                    ))
+                  ],
+                ),
+              ),
               buildTextField("Họ và Tên", "Đặng Phương A", false),
               buildTextField("Email", "dpA.17it3@vku.udn.vn",false),
               buildTextField("Password", "********",true),
               buildTextField("Location", "U Mê Thuộc",false),
               SizedBox(
-                height: 35,
+                height: 25,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  OutlineButton(
-                    padding: EdgeInsets.symmetric(horizontal: 60),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20)),
-                    onPressed: (){},
-                  child:
-                    Text("HUỶ",
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Color(0xff1b2536),
-                      letterSpacing: 2.2,
-                    ),),
-                  ),
-                  RaisedButton(
-                      onPressed: (){},
-                      color: Color(0xff1b2536),
-                      padding: EdgeInsets.symmetric(horizontal: 60),
-                      elevation: 2,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                      child:
-                      Text("LƯU",
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.white,
-                          letterSpacing: 2.2,
-                        ),),)
-                ],
-              ),
+              RaisedButton(
+                onPressed: (){},
+                color: Color(0xff1b2536),
+                padding: EdgeInsets.symmetric(horizontal: 60),
+                elevation: 2,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                child:
+                Text("LƯU",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                    letterSpacing: 2.2,
+                  ),),)
 
             ],
           ),

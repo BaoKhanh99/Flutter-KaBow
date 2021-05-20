@@ -6,7 +6,12 @@ import 'package:kabow/Search_Page/Searching_form.dart';
 import 'package:kabow/providers/LocationProvider.dart';
 import 'package:provider/provider.dart';
 
-class SearchingPage extends StatelessWidget {
+class SearchingPage extends StatefulWidget {
+  @override
+  _SearchingPageState createState() => _SearchingPageState();
+}
+
+class _SearchingPageState extends State<SearchingPage> {
   @override
   Widget build(BuildContext context) {
     String namePage = context.widget.toStringShort();

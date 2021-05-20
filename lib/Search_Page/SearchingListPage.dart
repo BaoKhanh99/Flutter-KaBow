@@ -4,6 +4,11 @@ import 'package:kabow/Search_Page/LocationItem.dart';
 import 'package:kabow/Search_Page/Searching_form.dart';
 
 class SearchingListPage extends StatefulWidget {
+  final address;
+  final purpose;
+  final numberPeople;
+  SearchingListPage({this.address, this.purpose, this.numberPeople});
+
   @override
   _SearchingListPageState createState() => _SearchingListPageState();
 }

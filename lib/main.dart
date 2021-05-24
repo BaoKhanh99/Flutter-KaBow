@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/foundation.dart';
+import 'package:kabow/Favorite_Page/FavoritePage.dart';
 import 'package:kabow/providers/LocationProvider.dart';
 import 'package:provider/provider.dart';
 import 'Search_Page/Searching_Page.dart';
 import 'Account_Page/Account_Page.dart';
-import 'Liked_Page/Liked_Page.dart';
 import 'Service_Page/Service_Page.dart';
 import 'Colors/ProjectColor.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _listbtngbar = [
     SearchingPage(),
     Service_Page(),
-    LikedPage(),
+    FavoritePage(),
     Acount_Page(),
   ];
 

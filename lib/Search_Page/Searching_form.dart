@@ -18,7 +18,7 @@ class Purpose {
   Purpose(this.id, this.name);
   static List<Purpose> getPurpose() {
     return <Purpose>[
-      Purpose(1, "du lich"),
+      Purpose(1, "tham quan"),
       Purpose(2, "Dạo biển"),
       Purpose(3, "tắm nắng"),
       Purpose(4, "Thư giãn"),
@@ -212,7 +212,7 @@ class _SearchingState extends State<Searching_form> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => SearchingListPage(
-                                        address: checkAddress,
+                                        province: checkAddress,
                                         purpose: checkPurpose,
                                         numberPeople: checkNumberPeople,
                                       )));

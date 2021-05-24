@@ -58,7 +58,8 @@ class _SearchingPageState extends State<SearchingPage> {
                 } else {
                   return SliverGrid(
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        //print('$snapshot.data');
+                        print('${snapshot.data[index].province}');
+
                         return Recommended(
                           location: snapshot.data[index],
                         );

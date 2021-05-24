@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
 import 'package:kabow/Search_Page/LocationPage.dart';
 
 class LocationItem extends StatefulWidget {
-  LocationItem({Key key}) : super(key: key);
+  final Location location;
+
+  LocationItem({this.location});
 
   @override
   _LocationItemState createState() => _LocationItemState();
@@ -19,7 +22,11 @@ class _LocationItemState extends State<LocationItem> {
         onTap: () {
           //print("object");
           Navigator.push(
-              context, MaterialPageRoute(builder: (context) => LocationPage()));
+              context,
+              MaterialPageRoute(
+                  builder: (context) => LocationPage(
+                        location: widget.location,
+                      )));
         },
         child: Container(
           margin: EdgeInsets.symmetric(horizontal: size.width * 0.03),
@@ -36,7 +43,7 @@ class _LocationItemState extends State<LocationItem> {
                   //color: Colors.blue,
                   padding: EdgeInsets.all(10),
                   height: size.height * 0.14,
-                  child: Image.asset("assets/Images/location/bana.jpg",
+                  child: Image.network(widget.location.images[0],
                       fit: BoxFit.cover),
                 ),
               ),
@@ -53,7 +60,7 @@ class _LocationItemState extends State<LocationItem> {
                           alignment: Alignment.centerLeft,
                           //color: PrimaryColor2,
                           child: Text(
-                            "Tên địa điểm",
+                            widget.location.title,
                             style: TextStyle(
                                 fontSize: 20, fontWeight: FontWeight.bold),
                           ),
@@ -73,7 +80,7 @@ class _LocationItemState extends State<LocationItem> {
                                 Flexible(
                                   //color: Colors.green,
                                   child: Text(
-                                    "địa chỉ",
+                                    widget.location.province,
                                     style: TextStyle(
                                       fontSize: 16,
                                     ),

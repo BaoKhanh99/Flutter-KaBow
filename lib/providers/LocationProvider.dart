@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Models/Location.dart';
+import 'package:kabow/Models/comments.dart';
 import 'package:kabow/services/LocationService.dart';
 import 'package:uuid/uuid.dart';
 
@@ -11,6 +12,9 @@ class LocationProvider with ChangeNotifier {
   String _province;
   List _images;
   String _people;
+  String _provinceId;
+  String _locationId;
+
   var uuid = Uuid();
 
   //Getters
@@ -20,6 +24,8 @@ class LocationProvider with ChangeNotifier {
   String get province => _province;
   List get images => _images;
   String get people => _people;
+  String get provinceId => _provinceId;
+  String get locationId => _locationId;
 
   set setProvince(String province) {
     if (province.toLowerCase() == "hà nội") {
@@ -45,9 +51,24 @@ class LocationProvider with ChangeNotifier {
     _purpose = purpose;
   }
 
+  set setProvinceId(String provinceId) {
+    _provinceId = provinceId;
+  }
+
+  set setLocationId(String locationId) {
+    _locationId = locationId;
+  }
+
+  set setPeople2(String people) {
+    _locationId = locationId;
+  }
+
   Stream<List<Location>> get locations => firestoreService.getLocation();
   Stream<List<Location>> get searchingQuery =>
       firestoreService.searchingQuery(_province, _purpose, _people);
+
+  Stream<List<Comment>> get getComments =>
+      firestoreService.getComments(_provinceId, _people, _locationId);
   //Functions
   loadAll(Location location) {
     if (location != null) {

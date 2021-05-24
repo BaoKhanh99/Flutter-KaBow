@@ -19,11 +19,10 @@ class Purpose {
   static List<Purpose> getPurpose() {
     return <Purpose>[
       Purpose(1, "tham quan"),
-      Purpose(2, "Dạo biển"),
-      Purpose(3, "tắm nắng"),
-      Purpose(4, "Thư giãn"),
+      Purpose(2, "tắm biển"),
+      Purpose(3, "chụp hình"),
+      Purpose(4, "mua sắm"),
       Purpose(5, "Đi phượt"),
-      Purpose(6, "ahihi"),
     ];
   }
 }
@@ -217,7 +216,7 @@ class _SearchingState extends State<Searching_form> {
                                         numberPeople: checkNumberPeople,
                                       )));
                         } else {
-                          print("don't fucking change");
+                          //print("don't fucking change");
                         }
                       }
                     }

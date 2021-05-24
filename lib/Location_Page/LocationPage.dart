@@ -4,13 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
-import 'package:kabow/Search_Page/CommentLocationPage.dart';
-import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:kabow/Location_Page/CommentLocationPage.dart';
+import 'package:kabow/Models/comments.dart';
 
 class LocationPage extends StatefulWidget {
   final Location location;
-  List<String> a = [];
+  //List<String> a = [];
   LocationPage({this.location});
   //LocationPage({Key key}) : super(key: key);
 
@@ -24,9 +23,6 @@ class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    //FirebaseFirestore firestore = FirebaseFirestore.instance;
-    //CollectionReference location = firestore.collection('location');
-
     return Scaffold(
         body: SafeArea(
       child: CustomScrollView(
@@ -66,7 +62,8 @@ class _LocationPageState extends State<LocationPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => CommentLocationPage()));
+                            builder: (context) => CommentLocationPage(
+                                location: widget.location)));
                   },
                   icon: Icon(
                     FontAwesomeIcons.solidCommentDots,

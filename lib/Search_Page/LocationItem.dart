@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
-import 'package:kabow/Search_Page/LocationPage.dart';
+import 'package:kabow/Location_Page/LocationPage.dart';
 
 class LocationItem extends StatefulWidget {
   final Location location;

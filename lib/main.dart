@@ -44,7 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   List<Widget> _listbtngbar = [
     SearchingPage(),
     Service_Page(),
-    Liked_Page(),
+    LikedPage(),
     Acount_Page(),
   ];
 

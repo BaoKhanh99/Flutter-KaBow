@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
 
-class Liked_Page extends StatelessWidget {
+class LikedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

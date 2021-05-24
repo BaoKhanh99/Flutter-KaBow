@@ -1,28 +1,31 @@
+import 'package:kabow/Models/comments.dart';
+
 class Location {
-  final String id;
+  final String locationId;
   final String title;
   final String detail;
   final String province;
   final List images;
+  final String people;
+  final String provinceId;
 
-  Location(this.id, this.title, this.detail, this.province, this.images);
+  Location(this.locationId, this.title, this.detail, this.province, this.images,
+      this.provinceId, this.people);
 
   factory Location.fromJson(Map<String, dynamic> json) {
-    return Location(json['id'], json['title'], json['detail'], json['province'],
-        json['images']);
+    return Location(json['location_id'], json['title'], json['detail'],
+        json['province'], json['images'], json['province_id'], json['people']);
   }
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
+      'location_id': locationId,
       'title': title,
       'detail': detail,
       'province': province,
-      //'thumbnail': thumbnail,
-      //'image_id': imageId,
-      'images': images
-      //'number_people': numberPeople,
-      // 'purpose': purposes,
+      'images': images,
+      'province_id': provinceId,
+      'people': people
     };
   }
 }

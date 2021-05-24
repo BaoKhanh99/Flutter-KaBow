@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kabow/Models/Location.dart';
+import 'package:kabow/Models/comments.dart';
 
 class LocationService {
   FirebaseFirestore _db = FirebaseFirestore.instance;
@@ -18,11 +19,8 @@ class LocationService {
 
   Stream<List<Location>> searchingQuery(
       String province, String purpose, String people) {
-    print("ddddddd $province");
-    // return _db.collection('location').snapshots().map((snapshot) =>
-    //     snapshot.docs.where((doc) => doc['province'] == 'Hà Nội').map((doc) {
-    //       Location.fromJson(doc.data());
-    //     }).toList());
+    //print("$province $purpose $people");
+
     return _db
         .collection('location')
         .doc("$province")
@@ -31,6 +29,20 @@ class LocationService {
         .snapshots()
         .map((snapshot) =>
             snapshot.docs.map((doc) => Location.fromJson(doc.data())).toList());
+  }
+
+  Stream<List<Comment>> getComments(
+      String provinceId, String people, String locationId) {
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa $provinceId $people $locationId");
+    return _db
+        .collection('location')
+        .doc('$provinceId')
+        .collection('$people')
+        .doc('$locationId')
+        .collection('comments')
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Comment.fromJson(doc.data())).toList());
   }
 }
 // CollectionReference col1 = Firestore.instance.collection('service');

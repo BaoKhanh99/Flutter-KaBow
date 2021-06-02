@@ -5,7 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Location_Page/CommentLocationPage.dart';
-import 'package:kabow/Models/comments.dart';
+import 'package:kabow/Models/LocationServices.dart';
+import 'package:kabow/providers/ServiceProvider.dart';
+import 'package:provider/provider.dart';
 
 class LocationPage extends StatefulWidget {
   final Location location;
@@ -23,159 +25,125 @@ class _LocationPageState extends State<LocationPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-        body: SafeArea(
-      child: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text("${widget.location.title}"),
-            actions: [
-              PopupMenuButton(itemBuilder: (context) {
-                return <PopupMenuEntry>[
-                  new PopupMenuItem(
-                      child: new TextButton(
-                          onPressed: () => print("report"),
-                          child: new Text("report")))
-                ];
-              })
-            ],
-          ),
-          SliverToBoxAdapter(
-              child: Row(
-            children: [
-              Expanded(
-                flex: 25,
-                child: IconButton(
-                  onPressed: () {
-                    print("object");
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.key,
-                    color: PrimaryColor,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 25,
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CommentLocationPage(
-                                location: widget.location)));
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.solidCommentDots,
-                    color: PrimaryColor,
-                  ),
-                ),
-              ),
-              Expanded(
-                flex: 25,
-                child: IconButton(
-                  onPressed: () {
-                    setState(() {
-                      if (isFavorite == false) {
-                        isFavorite = true;
-                        print("object");
-                      } else {
-                        isFavorite = false;
-                        print("dm");
-                      }
-                    });
-                  },
-                  icon: (isFavorite)
-                      ? Icon(
-                          FontAwesomeIcons.heart,
-                          color: PrimaryColor,
-                        )
-                      : Icon(
-                          FontAwesomeIcons.solidHeart,
-                          color: PrimaryColor,
-                        ),
-                ),
-              ),
-              Expanded(
-                flex: 25,
-                child: IconButton(
-                  onPressed: () {
-                    print("object");
-                  },
-                  icon: Icon(
-                    FontAwesomeIcons.shareAlt,
-                    color: PrimaryColor,
-                  ),
-                ),
-              ),
-            ],
-          )),
-          SliverToBoxAdapter(
-              child: Container(
-                  height: 250,
-                  width: size.width,
-                  child: ImageCarousel(
-                    images: widget.location.images,
-                  ))),
-          SliverToBoxAdapter(
-              child: LocationInformation(
-            location: widget.location,
-          )),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: EdgeInsets.all(10),
-              child: Text(
-                "Địa điểm xung quanh",
-                style: TextStyle(
-                    color: PrimaryColor,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold),
-              ),
+    return ChangeNotifierProvider(
+      create: (context) => ServiceProvider(),
+      child: Scaffold(
+          body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text("${widget.location.title}"),
+              actions: [
+                PopupMenuButton(itemBuilder: (context) {
+                  return <PopupMenuEntry>[
+                    new PopupMenuItem(
+                        child: new TextButton(
+                            onPressed: () => print("report"),
+                            child: new Text("report")))
+                  ];
+                })
+              ],
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              height: size.height * 0.15,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return Container(
-                    padding: EdgeInsets.only(right: 10),
-                    width: size.width * 0.5,
-                    //color: Colors.red,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        Image.asset(
-                          "assets/Images/location/bana.jpg",
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(top: size.height * 0.095),
-                          height: 100,
-                          color: BackgroundColor.withOpacity(0.6),
-                          alignment: Alignment.center,
-                          child: Text(
-                            "tên địa điểm và tên này siêu dài",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: PrimaryColor,
-                                fontSize: 20),
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
+            SliverToBoxAdapter(
+                child: Row(
+              children: [
+                Expanded(
+                  flex: 25,
+                  child: IconButton(
+                    onPressed: () {
+                      print("object");
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.key,
+                      color: PrimaryColor,
                     ),
-                  );
-                },
+                  ),
+                ),
+                Expanded(
+                  flex: 25,
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CommentLocationPage(
+                                  location: widget.location)));
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.solidCommentDots,
+                      color: PrimaryColor,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 25,
+                  child: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        if (isFavorite == false) {
+                          isFavorite = true;
+                          print("object");
+                        } else {
+                          isFavorite = false;
+                          print("dm");
+                        }
+                      });
+                    },
+                    icon: (isFavorite)
+                        ? Icon(
+                            FontAwesomeIcons.heart,
+                            color: PrimaryColor,
+                          )
+                        : Icon(
+                            FontAwesomeIcons.solidHeart,
+                            color: PrimaryColor,
+                          ),
+                  ),
+                ),
+                Expanded(
+                  flex: 25,
+                  child: IconButton(
+                    onPressed: () {
+                      print("object");
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.shareAlt,
+                      color: PrimaryColor,
+                    ),
+                  ),
+                ),
+              ],
+            )),
+            SliverToBoxAdapter(
+                child: Container(
+                    height: 250,
+                    width: size.width,
+                    child: ImageCarousel(
+                      images: widget.location.images,
+                    ))),
+            SliverToBoxAdapter(
+                child: LocationInformation(
+              location: widget.location,
+            )),
+            SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.all(10),
+                child: Text(
+                  "Các dịch vụ sẵn có",
+                  style: TextStyle(
+                      color: PrimaryColor,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold),
+                ),
               ),
             ),
-          )
-        ],
-      ),
-    ));
+            ServiceRecommended(
+              provinceId: widget.location.provinceId,
+            )
+          ],
+        ),
+      )),
+    );
   }
 }
 
@@ -270,5 +238,77 @@ class LocationInformation extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ServiceRecommended extends StatefulWidget {
+  final String provinceId;
+  ServiceRecommended({this.provinceId});
+
+  @override
+  _ServiceRecommendedState createState() => _ServiceRecommendedState();
+}
+
+class _ServiceRecommendedState extends State<ServiceRecommended> {
+  @override
+  Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+    //print(widget.provinceId);
+    final serviceProvider = Provider.of<ServiceProvider>(context);
+    serviceProvider.setProvinceId = widget.provinceId;
+    return StreamBuilder(
+        stream: serviceProvider.getLocationService,
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            List<LocationService> locationServices = snapshot.data;
+            return SliverToBoxAdapter(
+              child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                height: size.height * 0.15,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: locationServices.length,
+                  itemBuilder: (context, index) {
+                    return Container(
+                      padding: EdgeInsets.only(right: 10),
+                      width: size.width * 0.5,
+                      //color: Colors.red,
+                      child: Stack(
+                        fit: StackFit.expand,
+                        children: [
+                          Image.network(
+                            "${locationServices[index].images[0]}",
+                            fit: BoxFit.cover,
+                          ),
+                          Container(
+                            margin: EdgeInsets.only(top: size.height * 0.095),
+                            height: 100,
+                            color: BackgroundColor.withOpacity(0.6),
+                            alignment: Alignment.center,
+                            child: Text(
+                              "${locationServices[index].name}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: PrimaryColor,
+                                  fontSize: 20),
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          } else {
+            print("${snapshot.error}");
+            return SliverToBoxAdapter(
+              child: Container(
+                child: Text("sssss"),
+              ),
+            );
+          }
+        });
   }
 }

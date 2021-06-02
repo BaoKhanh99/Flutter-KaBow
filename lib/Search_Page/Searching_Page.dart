@@ -51,15 +51,13 @@ class _SearchingPageState extends State<SearchingPage> {
               builder: (context, snapshot) {
                 //QuerySnapshot values = snapshot.data;
                 if (!snapshot.hasData) {
-                  print(snapshot.error);
+                  //print(snapshot.error);
                   return SliverToBoxAdapter(
                     child: Text("no data ${snapshot.error}"),
                   );
                 } else {
                   return SliverGrid(
                       delegate: SliverChildBuilderDelegate((context, index) {
-                        print('${snapshot.data[index].province}');
-
                         return Recommended(
                           location: snapshot.data[index],
                         );

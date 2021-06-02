@@ -106,7 +106,7 @@ class _CommentedListState extends State<CommentedList> {
     commentProvider.setLocationId = widget.locationId;
     commentProvider.setProvinceId = widget.provinceId;
     commentProvider.setPeople = widget.people;
-    print("ppppppppppppppppppppppp ${widget.people}");
+    //print("ppppppppppppppppppppppp ${widget.people}");
     return StreamBuilder(
         stream: commentProvider.getComments,
         builder: (context, snapshot) {

@@ -113,6 +113,8 @@ class _SearchingState extends State<Searching_form> {
                 style: TextStyle(fontSize: 15),
                 controller: addressTf,
               ),
+
+              //button searching
               Row(
                 children: [
                   Container(
@@ -216,7 +218,10 @@ class _SearchingState extends State<Searching_form> {
                                         numberPeople: checkNumberPeople,
                                       )));
                         } else {
-                          //print("don't fucking change");
+                          LocationList(
+                              numberPeople: checkNumberPeople,
+                              province: checkAddress,
+                              purpose: checkPurpose);
                         }
                       }
                     }

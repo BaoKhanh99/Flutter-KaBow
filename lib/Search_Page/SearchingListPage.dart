@@ -20,6 +20,7 @@ class _SearchingListPageState extends State<SearchingListPage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    //print(widget.numberPeople);
     return ChangeNotifierProvider(
       create: (context) => LocationProvider(),
       child: Scaffold(

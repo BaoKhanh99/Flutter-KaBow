@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Models/comments.dart';
-import 'package:kabow/services/LocationService.dart';
+import 'package:kabow/services/Service.dart';
 import 'package:uuid/uuid.dart';
 
 class CommentProvider with ChangeNotifier {
-  final firestoreService = LocationService();
+  final firestoreService = Service();
   String _people;
   String _provinceId;
   String _locationId;

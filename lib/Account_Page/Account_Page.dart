@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
+import 'package:kabow/Account_Page/login_page.dart';
 
 class Acount_Page extends StatelessWidget {
   bool _canShowButton = false;
@@ -21,6 +22,7 @@ class Acount_Page extends StatelessWidget {
             SizedBox(
               height: 30,
             ),
+
             Row(
               children: [
                 Icon(
@@ -71,30 +73,32 @@ class Acount_Page extends StatelessWidget {
             ),
             GestureDetector(
               onTap: () {
-                showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                        title: Text("ĐỔI MẬT KHẨU"),
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            Text("OP1"),
-                            Text("OP2"),
-                            Text("OP3"),
-                            Text("OP4"),
-                          ],
-                        ),
-                        actions: [
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            child: Text("Close"),
-                          ),
-                        ],
-                      );
-                    });
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) => login_page()));
+//                showDialog(
+//                    context: context,
+//                    builder: (BuildContext context) {
+//                      return AlertDialog(
+//                        title: Text("ĐỔI MẬT KHẨU"),
+//                        content: Column(
+//                          mainAxisSize: MainAxisSize.min,
+//                          children: [
+//                            Text("OP1"),
+//                            Text("OP2"),
+//                            Text("OP3"),
+//                            Text("OP4"),
+//                          ],
+//                        ),
+//                        actions: [
+//                          FlatButton(
+//                            onPressed: () {
+//                              Navigator.of(context).pop();
+//                            },
+//                            child: Text("Close"),
+//                          ),
+//                        ],
+//                      );
+//                    });
               },
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8.0),

@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 
-class Acount_Page extends StatelessWidget {
-  bool _canShowButton = false;
+class Acount_Page extends StatefulWidget {
+  @override
+  _Acount_PageState createState() => _Acount_PageState();
+}
+
+class _Acount_PageState extends State<Acount_Page> {
+  bool _Show = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,35 +52,40 @@ class Acount_Page extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => ProfileEdit_page()));
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "THÔNG TIN TÀI KHOẢN",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xff1b2536),
-                    ),
-                  ],
+            Visibility(
+              visible: !_Show,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => ProfileEdit_page()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "THÔNG TIN TÀI KHOẢN",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[600]),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Color(0xff1b2536),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
-            GestureDetector(
-              onTap: () {
-                Navigator.of(context).push(MaterialPageRoute(
-                    builder: (BuildContext context) => login_page()));
+            Visibility(
+              visible: !_Show,
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                      builder: (BuildContext context) => login_page()));
 //                showDialog(
 //                    context: context,
 //                    builder: (BuildContext context) {
@@ -99,24 +110,50 @@ class Acount_Page extends StatelessWidget {
 //                        ],
 //                      );
 //                    });
-              },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "ĐỔI MẬT KHẨU",
-                      style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
-                    ),
-                    Icon(
-                      Icons.arrow_forward,
-                      color: Color(0xff1b2536),
-                    ),
-                  ],
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "ĐỔI MẬT KHẨU",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey[600]),
+                      ),
+                      Icon(
+                        Icons.arrow_forward,
+                        color: Color(0xff1b2536),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            Visibility(
+              visible: _Show,
+              child: Center(
+                child: RaisedButton(
+                  color: Color(0xff1b2536),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  onPressed: ()  {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => login_page()));
+                    setState((){
+                      _Show = !_Show;
+                    });
+                  },
+                  child: Text(
+                    "ĐĂNG NHẬP",
+                    style: TextStyle(
+                        fontSize: 16,
+                        letterSpacing: 2.2,
+                        color: Colors.white),
+                  ),
                 ),
               ),
             ),
@@ -151,7 +188,7 @@ class Acount_Page extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  "Dark Mode",
+                  "DARK MODE",
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
@@ -395,21 +432,27 @@ class Acount_Page extends StatelessWidget {
             SizedBox(
               height: 7,
             ),
-            Center(
-              child: RaisedButton(
-                 color: Color(0xff1b2536),
-                 padding: EdgeInsets.symmetric(horizontal: 40),
-                 shape: RoundedRectangleBorder(
-                     borderRadius: BorderRadius.circular(20)),
-                 onPressed: () {
-                 },
-                 child: Text(
-                   "SIGN OUT",
-                   style: TextStyle(
-                       fontSize: 16,
-                       letterSpacing: 2.2,
-                       color: Colors.white),
-                 ),
+            Visibility(
+              visible: !_Show,
+              child: Center(
+                child: RaisedButton(
+                   color: Color(0xff1b2536),
+                   padding: EdgeInsets.symmetric(horizontal: 40),
+                   shape: RoundedRectangleBorder(
+                       borderRadius: BorderRadius.circular(20)),
+                   onPressed: () {
+                     setState(() {
+                       _Show = !_Show;
+                     });
+                   },
+                   child: Text(
+                     "ĐĂNG XUẤT",
+                     style: TextStyle(
+                         fontSize: 16,
+                         letterSpacing: 2.2,
+                         color: Colors.white),
+                   ),
+                ),
               ),
             ),
           ],

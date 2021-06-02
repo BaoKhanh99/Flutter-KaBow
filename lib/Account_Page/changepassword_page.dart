@@ -6,6 +6,7 @@ class changepassword_page extends StatefulWidget{
 class _changepasswordState extends State<changepassword_page>{
   @override
   Widget build(BuildContext context) {
+    bool isVisible =true;
     Size size = MediaQuery.of(context).size;
     // TODO: implement build
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
-<<<<<<< HEAD
 import 'package:kabow/Models/LocationServices.dart';
 import 'package:kabow/Service_Page/ServiceItem.dart';
 import 'package:kabow/providers/ServiceProvider.dart';
@@ -11,15 +10,11 @@ class ServicePage extends StatefulWidget {
   @override
   _ServicePageState createState() => _ServicePageState();
 }
-=======
-import 'package:kabow/Search_Page/LocationItem.dart';
->>>>>>> df6ed19742fbbfa72ba770639013935ef9f14738
 
 class _ServicePageState extends State<ServicePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-<<<<<<< HEAD
     return ChangeNotifierProvider(
       create: (context) => ServiceProvider(),
       child: Scaffold(
@@ -44,43 +39,12 @@ class _ServicePageState extends State<ServicePage> {
                   sliver: ServiceList())
             ],
           ),
-=======
-    return Scaffold(
-      body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              backgroundColor: BackgroundColor,
-              //expandedHeight: 300,
-              floating: true,
-              pinned: true,
-              toolbarHeight: size.height * 0.11,
-              title: Image.asset(
-                'assets/Images/logo.png',
-                height: size.height * 0.09,
-              ),
-              centerTitle: true,
-              automaticallyImplyLeading: false,
-            ),
-            SliverPadding(
-                padding: EdgeInsets.symmetric(vertical: 10),
-            ),
-            SliverList(delegate: SliverChildBuilderDelegate(
-                (BuildContext context, int index){
-                  return Container(
-                    
-                  );
-                },
-            ))
-          ],
->>>>>>> df6ed19742fbbfa72ba770639013935ef9f14738
         ),
       ),
     );
   }
 }
 
-<<<<<<< HEAD
 class ServiceList extends StatefulWidget {
   ServiceList({Key key}) : super(key: key);
 
@@ -121,5 +85,3 @@ class _ServiceListState extends State<ServiceList> {
         });
   }
 }
-=======
->>>>>>> df6ed19742fbbfa72ba770639013935ef9f14738

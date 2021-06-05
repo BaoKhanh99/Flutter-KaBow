@@ -188,6 +188,8 @@ class _SearchingState extends State<Searching_form> {
                   ),
                 ],
               ),
+
+              //button search
               Container(
                 width: size.width,
                 height: size.height * 0.05,

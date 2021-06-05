@@ -14,6 +14,7 @@ class ServiceProvider with ChangeNotifier {
   Map _address;
   bool _foodService;
   String _provinceId;
+  String _category;
 
   //Getters
   int get id => _id;
@@ -24,13 +25,30 @@ class ServiceProvider with ChangeNotifier {
   Map get address => _address;
   String get provinceId => _provinceId;
   bool get foodService => _foodService;
+  String get category => _category;
 
   set setProvinceId(String provinceId) {
     _provinceId = provinceId;
   }
 
-  Stream<List<LocationService>> get getLocationService =>
-      firestoreService.getLocationService(_provinceId);
+  set setId(int id) {
+    _id = id;
+  }
+
+  Stream<List<LocationService>> get getRecommendedService =>
+      firestoreService.getRecommendedService(_provinceId);
+
+  Stream<List<LocationService>> get getRecommendedServiceExceptSameDoc =>
+      firestoreService.getRecommendedServiceExceptSameDoc(_provinceId, _id);
+
+  Stream<List<LocationService>> get gethcmServices =>
+      firestoreService.gethcmServices();
+
+  Stream<List<LocationService>> get gethnServices =>
+      firestoreService.gethnServices();
+
+  Stream<List<LocationService>> get getdnServices =>
+      firestoreService.getdnServices();
 
   //Functions
 

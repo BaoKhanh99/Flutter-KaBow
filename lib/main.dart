@@ -43,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _currentIndex = 0;
   List<Widget> _listbtngbar = [
     SearchingPage(),
-    Service_Page(),
+    ServicePage(),
     FavoritePage(),
     Acount_Page(),
   ];

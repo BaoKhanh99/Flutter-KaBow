@@ -5,7 +5,8 @@ import 'package:kabow/Models/LocationServices.dart';
 
 class Service {
   FirebaseFirestore _db = FirebaseFirestore.instance;
-  //Get Entries
+
+  //Get location
   Stream<List<Location>> getLocation() {
     return _db
         .collection('location')
@@ -16,6 +17,7 @@ class Service {
             snapshot.docs.map((doc) => Location.fromJson(doc.data())).toList());
   }
 
+  //searching function
   Stream<List<Location>> searchingQuery(
       String province, String purpose, String people) {
     //print("$province $purpose $people");
@@ -30,6 +32,7 @@ class Service {
             snapshot.docs.map((doc) => Location.fromJson(doc.data())).toList());
   }
 
+  //get comments
   Stream<List<Comment>> getComments(
       String provinceId, String people, String locationId) {
     return _db
@@ -43,11 +46,61 @@ class Service {
             snapshot.docs.map((doc) => Comment.fromJson(doc.data())).toList());
   }
 
-  Stream<List<LocationService>> getLocationService(String provinceId) {
-    print(provinceId);
+  //get services for location
+  Stream<List<LocationService>> getRecommendedService(String provinceId) {
     return _db
         .collection('location')
         .doc("$provinceId")
+        .collection("services")
+        .limit(5)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => LocationService.fromJson(doc.data()))
+            .toList());
+  }
+
+  Stream<List<LocationService>> getRecommendedServiceExceptSameDoc(
+      String provinceId, int id) {
+    return _db
+        .collection('location')
+        .doc("$provinceId")
+        .collection("services")
+        .where("id", isNotEqualTo: id)
+        .limit(5)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => LocationService.fromJson(doc.data()))
+            .toList());
+  }
+
+  Stream<List<LocationService>> gethcmServices() {
+    return _db
+        .collection('location')
+        .doc("hochiminh")
+        .collection("services")
+        .limit(5)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => LocationService.fromJson(doc.data()))
+            .toList());
+  }
+
+  Stream<List<LocationService>> gethnServices() {
+    return _db
+        .collection('location')
+        .doc("hanoi")
+        .collection("services")
+        .limit(5)
+        .snapshots()
+        .map((snapshot) => snapshot.docs
+            .map((doc) => LocationService.fromJson(doc.data()))
+            .toList());
+  }
+
+  Stream<List<LocationService>> getdnServices() {
+    return _db
+        .collection('location')
+        .doc("danang")
         .collection("services")
         .limit(5)
         .snapshots()

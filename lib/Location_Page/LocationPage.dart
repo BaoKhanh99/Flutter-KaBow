@@ -6,6 +6,7 @@ import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Location_Page/CommentLocationPage.dart';
 import 'package:kabow/Models/LocationServices.dart';
+import 'package:kabow/Service_Page/ServiceDetail.dart';
 import 'package:kabow/providers/ServiceProvider.dart';
 import 'package:provider/provider.dart';
 
@@ -50,9 +51,7 @@ class _LocationPageState extends State<LocationPage> {
                 Expanded(
                   flex: 25,
                   child: IconButton(
-                    onPressed: () {
-                      print("object");
-                    },
+                    onPressed: () {},
                     icon: Icon(
                       FontAwesomeIcons.key,
                       color: PrimaryColor,
@@ -82,7 +81,7 @@ class _LocationPageState extends State<LocationPage> {
                       setState(() {
                         if (isFavorite == false) {
                           isFavorite = true;
-                          print("object");
+                          //print("object");
                         } else {
                           isFavorite = false;
                           print("dm");
@@ -103,9 +102,7 @@ class _LocationPageState extends State<LocationPage> {
                 Expanded(
                   flex: 25,
                   child: IconButton(
-                    onPressed: () {
-                      print("object");
-                    },
+                    onPressed: () {},
                     icon: Icon(
                       FontAwesomeIcons.shareAlt,
                       color: PrimaryColor,
@@ -249,6 +246,7 @@ class ServiceRecommended extends StatefulWidget {
   _ServiceRecommendedState createState() => _ServiceRecommendedState();
 }
 
+//get recommended service
 class _ServiceRecommendedState extends State<ServiceRecommended> {
   @override
   Widget build(BuildContext context) {
@@ -257,7 +255,7 @@ class _ServiceRecommendedState extends State<ServiceRecommended> {
     final serviceProvider = Provider.of<ServiceProvider>(context);
     serviceProvider.setProvinceId = widget.provinceId;
     return StreamBuilder(
-        stream: serviceProvider.getLocationService,
+        stream: serviceProvider.getRecommendedService,
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<LocationService> locationServices = snapshot.data;
@@ -269,32 +267,42 @@ class _ServiceRecommendedState extends State<ServiceRecommended> {
                   scrollDirection: Axis.horizontal,
                   itemCount: locationServices.length,
                   itemBuilder: (context, index) {
-                    return Container(
-                      padding: EdgeInsets.only(right: 10),
-                      width: size.width * 0.5,
-                      //color: Colors.red,
-                      child: Stack(
-                        fit: StackFit.expand,
-                        children: [
-                          Image.network(
-                            "${locationServices[index].images[0]}",
-                            fit: BoxFit.cover,
-                          ),
-                          Container(
-                            margin: EdgeInsets.only(top: size.height * 0.095),
-                            height: 100,
-                            color: BackgroundColor.withOpacity(0.6),
-                            alignment: Alignment.center,
-                            child: Text(
-                              "${locationServices[index].name}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: PrimaryColor,
-                                  fontSize: 20),
-                              textAlign: TextAlign.center,
+                    return InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ServiceDetail(
+                                      locationService: locationServices[index],
+                                    )));
+                      },
+                      child: Container(
+                        padding: EdgeInsets.only(right: 10),
+                        width: size.width * 0.5,
+                        //color: Colors.red,
+                        child: Stack(
+                          fit: StackFit.expand,
+                          children: [
+                            Image.network(
+                              "${locationServices[index].images[0]}",
+                              fit: BoxFit.cover,
                             ),
-                          )
-                        ],
+                            Container(
+                              margin: EdgeInsets.only(top: size.height * 0.095),
+                              height: 100,
+                              color: BackgroundColor.withOpacity(0.6),
+                              alignment: Alignment.center,
+                              child: Text(
+                                "${locationServices[index].name}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: PrimaryColor,
+                                    fontSize: 20),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     );
                   },

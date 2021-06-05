@@ -1,5 +1,3 @@
-import 'package:kabow/Models/comments.dart';
-
 class Location {
   final String locationId;
   final String title;

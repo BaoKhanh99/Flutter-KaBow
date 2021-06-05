@@ -7,9 +7,18 @@ class LocationService {
   final Map address;
   final String provinceId;
   final bool foodService;
+  final String category;
 
-  LocationService(this.id, this.name, this.images, this.address,
-      this.provinceId, this.price, this.foodService, this.washingMachine);
+  LocationService(
+      this.id,
+      this.name,
+      this.images,
+      this.address,
+      this.provinceId,
+      this.price,
+      this.foodService,
+      this.washingMachine,
+      this.category);
 
   factory LocationService.fromJson(Map<String, dynamic> json) {
     return LocationService(
@@ -20,7 +29,8 @@ class LocationService {
         json['provinceId'],
         json['price'],
         json['foodService'],
-        json['washingMachine']);
+        json['washingMachine'],
+        json['category']);
   }
 
   Map<String, dynamic> toMap() {
@@ -32,7 +42,8 @@ class LocationService {
       'provinceId': provinceId,
       'price': price,
       'foodService': foodService,
-      'washingMachine': washingMachine
+      'washingMachine': washingMachine,
+      'category': category,
     };
   }
 }

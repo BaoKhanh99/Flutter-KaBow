@@ -53,7 +53,7 @@ class _RecommendedState extends State<Recommended> {
                   height: MediaQuery.of(context).size.height * 0.14,
                   decoration: new BoxDecoration(
                     image: new DecorationImage(
-                      image: NetworkImage(widget.location.images[1]),
+                      image: NetworkImage(widget.location.images[0]),
                       fit: BoxFit.fitHeight,
                     ),
                   )),

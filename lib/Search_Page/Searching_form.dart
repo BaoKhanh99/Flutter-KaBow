@@ -18,11 +18,15 @@ class Purpose {
   Purpose(this.id, this.name);
   static List<Purpose> getPurpose() {
     return <Purpose>[
-      Purpose(1, "tham quan"),
-      Purpose(2, "tắm biển"),
-      Purpose(3, "chụp hình"),
-      Purpose(4, "mua sắm"),
-      Purpose(5, "Đi phượt"),
+      Purpose(1, "Ăn uống"),
+      Purpose(2, "Mua sắm"),
+      Purpose(3, "Tham quan"),
+      Purpose(4, "Chụp hình"),
+      Purpose(5, "Đi dạo"),
+      Purpose(6, "Tắm biển"),
+      Purpose(7, "Vui chơi"),
+      Purpose(8, "Nghe nhìn"),
+      Purpose(9, "Khám phá"),
     ];
   }
 }

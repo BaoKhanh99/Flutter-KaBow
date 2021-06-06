@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 import 'package:kabow/Account_Page/login_page.dart';
+import 'package:kabow/Colors/ProjectColor.dart';
 
 class Acount_Page extends StatefulWidget {
   @override
@@ -13,8 +14,11 @@ class _Acount_PageState extends State<Acount_Page> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: size.height * 0.13,
+        backgroundColor: BackgroundColor,
         centerTitle: true,
         title: Image.asset(
           'assets/logo.png',
@@ -28,7 +32,6 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 30,
             ),
-
             Row(
               children: [
                 Icon(
@@ -69,7 +72,7 @@ class _Acount_PageState extends State<Acount_Page> {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey[600]),
+                            color: Colors.black87),
                       ),
                       Icon(
                         Icons.arrow_forward,
@@ -121,7 +124,7 @@ class _Acount_PageState extends State<Acount_Page> {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,
-                            color: Colors.grey[600]),
+                            color: Colors.black87),
                       ),
                       Icon(
                         Icons.arrow_forward,
@@ -140,24 +143,21 @@ class _Acount_PageState extends State<Acount_Page> {
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  onPressed: ()  {
+                  onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => login_page()));
-                    setState((){
+                    setState(() {
                       _Show = !_Show;
                     });
                   },
                   child: Text(
                     "ĐĂNG NHẬP",
                     style: TextStyle(
-                        fontSize: 16,
-                        letterSpacing: 2.2,
-                        color: Colors.white),
+                        fontSize: 16, letterSpacing: 2.2, color: Colors.white),
                   ),
                 ),
               ),
             ),
-
             SizedBox(
               height: 30,
             ),
@@ -192,30 +192,34 @@ class _Acount_PageState extends State<Acount_Page> {
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w500,
-                      color: Colors.grey[600]),
+                      color: Colors.black87),
                 ),
                 Transform.scale(
                     scale: 0.7,
                     child: CupertinoSwitch(
                         value: true,
-                        activeColor: Color(0xff1b2536),
+                        activeColor: Colors.black87,
                         onChanged: (bool val) {})),
               ],
             ),
+
+            //language
             GestureDetector(
               onTap: () {
                 showDialog(
                     context: context,
                     builder: (BuildContext context) {
                       return AlertDialog(
-                        title: Text("NGÔN NGỮ"),
+                        title: Text(
+                          "NGÔN NGỮ",
+                          style: TextStyle(color: Colors.black87),
+                        ),
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
                           children: [
-                            Text("OP1"),
-                            Text("OP2"),
-                            Text("OP3"),
-                            Text("OP4"),
+                            Text("English"),
+                            Text("Tiếng Việt"),
+                            Text("中国人"),
                           ],
                         ),
                         actions: [
@@ -239,7 +243,7 @@ class _Acount_PageState extends State<Acount_Page> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
+                          color: Colors.black87),
                     ),
                     Icon(
                       Icons.arrow_forward,
@@ -249,6 +253,8 @@ class _Acount_PageState extends State<Acount_Page> {
                 ),
               ),
             ),
+
+            //help
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -286,16 +292,18 @@ class _Acount_PageState extends State<Acount_Page> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
+                          color: Colors.black87),
                     ),
                     Icon(
                       Icons.arrow_forward,
-                      color: Color(0xff1b2536),
+                      color: Colors.black87,
                     ),
                   ],
                 ),
               ),
             ),
+
+            //version
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -303,7 +311,7 @@ class _Acount_PageState extends State<Acount_Page> {
                     builder: (BuildContext context) {
                       return AlertDialog(
                         title: Text("PHIÊN BẢN"),
-                        content: Text("Phiên bản XXXXX"),
+                        content: Text("Phiên bản: kabow.1.1"),
                         actions: [
                           FlatButton(
                             onPressed: () {
@@ -325,16 +333,18 @@ class _Acount_PageState extends State<Acount_Page> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
+                          color: Colors.black87),
                     ),
                     Icon(
                       Icons.arrow_forward,
-                      color: Color(0xff1b2536),
+                      color: Colors.black87,
                     ),
                   ],
                 ),
               ),
             ),
+
+            //Privacy Policy
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -372,7 +382,7 @@ class _Acount_PageState extends State<Acount_Page> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
+                          color: Colors.black87),
                     ),
                     Icon(
                       Icons.arrow_forward,
@@ -382,6 +392,8 @@ class _Acount_PageState extends State<Acount_Page> {
                 ),
               ),
             ),
+
+            //legal information
             GestureDetector(
               onTap: () {
                 showDialog(
@@ -419,7 +431,7 @@ class _Acount_PageState extends State<Acount_Page> {
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
-                          color: Colors.grey[600]),
+                          color: Colors.black87),
                     ),
                     Icon(
                       Icons.arrow_forward,
@@ -436,22 +448,20 @@ class _Acount_PageState extends State<Acount_Page> {
               visible: !_Show,
               child: Center(
                 child: RaisedButton(
-                   color: Color(0xff1b2536),
-                   padding: EdgeInsets.symmetric(horizontal: 40),
-                   shape: RoundedRectangleBorder(
-                       borderRadius: BorderRadius.circular(20)),
-                   onPressed: () {
-                     setState(() {
-                       _Show = !_Show;
-                     });
-                   },
-                   child: Text(
-                     "ĐĂNG XUẤT",
-                     style: TextStyle(
-                         fontSize: 16,
-                         letterSpacing: 2.2,
-                         color: Colors.white),
-                   ),
+                  color: Color(0xff1b2536),
+                  padding: EdgeInsets.symmetric(horizontal: 40),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  onPressed: () {
+                    setState(() {
+                      _Show = !_Show;
+                    });
+                  },
+                  child: Text(
+                    "ĐĂNG XUẤT",
+                    style: TextStyle(
+                        fontSize: 16, letterSpacing: 2.2, color: Colors.white),
+                  ),
                 ),
               ),
             ),

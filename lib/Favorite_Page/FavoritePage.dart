@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Favorite_Page/favoriteItem.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
 
 class FavoritePage extends StatelessWidget {
@@ -25,7 +26,7 @@ class FavoritePage extends StatelessWidget {
             ),
             SliverPadding(
                 padding: EdgeInsets.symmetric(vertical: 10),
-                sliver: LocationList())
+                sliver: FavoriteList())
           ],
         ),
       ),
@@ -33,21 +34,21 @@ class FavoritePage extends StatelessWidget {
   }
 }
 
-class LocationList extends StatefulWidget {
-  LocationList({Key key}) : super(key: key);
+class FavoriteList extends StatefulWidget {
+  FavoriteList({Key key}) : super(key: key);
 
   @override
   _LocationListState createState() => _LocationListState();
 }
 
-class _LocationListState extends State<LocationList> {
+class _LocationListState extends State<FavoriteList> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SliverList(
         delegate: SliverChildBuilderDelegate(
       (context, index) {
-        return LocationItem();
+        return FavoriteItem();
       },
       childCount: 10,
     ));

@@ -115,7 +115,7 @@ class Service {
 
   //update user data
   Future updateUserData(String name, int phoneNumber, String address) async {
-    return await _db
+    return await _db.collection('user')
         .doc(uid)
         .set({'name': name, 'phoneNumber': phoneNumber, 'address': address});
   }

@@ -70,7 +70,7 @@ class _registerpageState extends State<register_page>{
                       setState(() => name = val);
                     },
                   ),
-                  SizedBox(height: size.height*0.02,),
+                  SizedBox(height: size.height*0.01,),
                 TextFormField(
                   decoration: InputDecoration(
                       hintText: "Nhập email",
@@ -82,7 +82,7 @@ class _registerpageState extends State<register_page>{
                     setState(() => email = val);
                   },
                 ),
-                  SizedBox(height: size.height*0.02,),
+                  SizedBox(height: size.height*0.01,),
                   TextFormField(
                     decoration: InputDecoration(
                         hintText: "Nhập mật khẩu",
@@ -104,28 +104,28 @@ class _registerpageState extends State<register_page>{
                       setState(() =>password = val);
                     },
                     ),
-                  SizedBox(height: size.height*0.02,),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "Nhập lại mật khẩu",
-                      labelText: "Nhập lại mật khẩu",
-                      labelStyle: TextStyle(fontSize: 18, color: Colors.black),
-                      suffixIcon: IconButton(
-                        icon: Icon(Icons.remove_red_eye),
-                        color: Colors.grey,
-                        onPressed: (){
-                          setState(() {
-                            _showrepassword = !_showrepassword;
-                          });
-                        },
-                      ),
-                    ),
-                    obscureText: _showpassword,
-                    onChanged: ( val){
-                      setState(() => repassword = val);
-                    },
-                    validator: (val) => val != password ?"Mật khẩu không trùng khớp":null,
-                  ),
+                  SizedBox(height: size.height*0.01,),
+//                  TextFormField(
+//                    decoration: InputDecoration(
+//                      hintText: "Nhập lại mật khẩu",
+//                      labelText: "Nhập lại mật khẩu",
+//                      labelStyle: TextStyle(fontSize: 18, color: Colors.black),
+//                      suffixIcon: IconButton(
+//                        icon: Icon(Icons.remove_red_eye),
+//                        color: Colors.grey,
+//                        onPressed: (){
+//                          setState(() {
+//                            _showrepassword = !_showrepassword;
+//                          });
+//                        },
+//                      ),
+//                    ),
+//                    obscureText: _showpassword,
+//                    onChanged: ( val){
+//                      setState(() => repassword = val);
+//                    },
+//                    validator: (val) => val != password ?"Mật khẩu không trùng khớp":null,
+//                  ),
 
                 ]
               )),
@@ -140,11 +140,14 @@ class _registerpageState extends State<register_page>{
                     if (_formKey.currentState.validate()){
                       dynamic result = await _auth.registerWithEmailAndPassword(email, password, name);
                       if(result == null){
-
+                        setState(() => error = "Đinh dạng email không đúng!");
                       }
+//                      else{
+//
+//                      }
                     }
                   },
-                  color: Color(0xff1b2536),
+                  color: Color(0xffc5400c),
                   padding:  EdgeInsets.symmetric(horizontal: 80),
                   elevation: 2,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
@@ -155,11 +158,23 @@ class _registerpageState extends State<register_page>{
                       color: Colors.white,
                       letterSpacing: 2.2,
                     ),),
-                )
+                ),
             ),
           ),
           SizedBox(
-            height: size.height * 0.02,
+            height: size.height * 0.01,
+          ),
+          Center(
+            child: Text(
+              error,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.red,
+              ),
+            ),
+          ),
+          SizedBox(
+            height: size.height * 0.01,
           ),
           Container(
             child: Row(
@@ -180,7 +195,8 @@ class _registerpageState extends State<register_page>{
                     "Đăng nhập",
                     style: TextStyle(
                       fontSize: 18,
-                      color: Colors.blue,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xff1b2536),
                     ),
                   ),
                 ),

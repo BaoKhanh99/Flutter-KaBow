@@ -18,7 +18,7 @@ class AuthenService {
       String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
+          email: email, password: password,);
       User user = result.user;
 
       await Service(uid: user.uid).updateUserData(name, 1999, 'address');

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/login_page.dart';
+import 'package:kabow/services/auth.dart';
 
 class register_page extends StatefulWidget{
   @override
   _registerpageState createState() => _registerpageState();
 }
 class _registerpageState extends State<register_page>{
+  final AuthenService _auth = AuthenService();
   final _formKey = GlobalKey<FormState>();
   bool _showpassword = true;
   bool _showrepassword = true;
@@ -13,6 +15,7 @@ class _registerpageState extends State<register_page>{
   String password ="";
   String repassword ="";
   String  name ="";
+  String error="";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -135,8 +138,10 @@ class _registerpageState extends State<register_page>{
                 child:RaisedButton(
                   onPressed: () async{
                     if (_formKey.currentState.validate()){
-                      print(email);
-                      print(password);
+                      dynamic result = await _auth.registerWithEmailAndPassword(email, password, name);
+                      if(result == null){
+
+                      }
                     }
                   },
                   color: Color(0xff1b2536),
@@ -182,7 +187,6 @@ class _registerpageState extends State<register_page>{
               ],
             ),
           ),
-
         ],),),
     ],
     ),

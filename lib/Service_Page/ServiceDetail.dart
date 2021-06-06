@@ -136,16 +136,20 @@ class _ServiceInformationState extends State<ServiceInformation> {
   Time _selectedTime;
 
   CreateAlertDialog(BuildContext context) {
+    final moneyFormat =
+        NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
               title: Text("Xác nhận thanh toán"),
               content: Text(
-                  "Bạn đồng thanh toán khoản tiền $totalPrice phải không? "),
+                  "Bạn đồng thanh toán khoản tiền ${moneyFormat.format(totalPrice)}đ ? "),
               actions: [
                 FlatButton(
-                    onPressed: () => print("Yes"), child: Text("Đồng ý")),
+                    color: PrimaryColor2,
+                    onPressed: () => print("Yes"),
+                    child: Text("Đồng ý")),
                 FlatButton(
                     onPressed: () => Navigator.pop(context), child: Text("Huỷ"))
               ]);
@@ -402,6 +406,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
                 ]),
           ),
 
+          //confirm Button
           Center(
               child: Align(
             alignment: Alignment.bottomCenter,

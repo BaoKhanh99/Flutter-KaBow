@@ -139,7 +139,7 @@ class _Acount_PageState extends State<Acount_Page> {
               visible: _Show,
               child: Center(
                 child: RaisedButton(
-                  color: Color(0xff1b2536),
+                  color: PrimaryColor2,
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -198,7 +198,7 @@ class _Acount_PageState extends State<Acount_Page> {
                     scale: 0.7,
                     child: CupertinoSwitch(
                         value: true,
-                        activeColor: Colors.black87,
+                        activeColor: PrimaryColor,
                         onChanged: (bool val) {})),
               ],
             ),
@@ -448,7 +448,7 @@ class _Acount_PageState extends State<Acount_Page> {
               visible: !_Show,
               child: Center(
                 child: RaisedButton(
-                  color: Color(0xff1b2536),
+                  color: PrimaryColor2,
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),

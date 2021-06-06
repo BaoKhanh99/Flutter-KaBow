@@ -3,6 +3,7 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Location_Page/CommentLocationPage.dart';
@@ -135,16 +136,20 @@ class _ServiceInformationState extends State<ServiceInformation> {
   Time _selectedTime;
 
   CreateAlertDialog(BuildContext context) {
+    final moneyFormat =
+        NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
     return showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
               title: Text("Xác nhận thanh toán"),
               content: Text(
-                  "Bạn đồng thanh toán khoản tiền $totalPrice phải không? "),
+                  "Bạn đồng thanh toán khoản tiền ${moneyFormat.format(totalPrice)}đ ? "),
               actions: [
                 FlatButton(
-                    onPressed: () => print("Yes"), child: Text("Đồng ý")),
+                    color: PrimaryColor2,
+                    onPressed: () => print("Yes"),
+                    child: Text("Đồng ý")),
                 FlatButton(
                     onPressed: () => Navigator.pop(context), child: Text("Huỷ"))
               ]);
@@ -240,6 +245,8 @@ class _ServiceInformationState extends State<ServiceInformation> {
 
   @override
   Widget build(BuildContext context) {
+    final moneyFormat =
+        NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
     Size size = MediaQuery.of(context).size;
     String foodService =
         widget.locationService.foodService == true ? "có" : "không";
@@ -393,30 +400,34 @@ class _ServiceInformationState extends State<ServiceInformation> {
                     style: TextStyle(fontSize: 20),
                   ),
                   Text(
-                    "$totalPrice đ",
+                    "${moneyFormat.format(totalPrice)} đ",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                 ]),
           ),
 
+          //confirm Button
           Center(
-              child: Container(
-            width: size.width * 0.7,
-            height: size.height * 0.05,
-            child: OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    backgroundColor: PrimaryColor2,
-                    shape: const RoundedRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(5)))),
-                onPressed: () {
-                  CreateAlertDialog(context);
-                }
-                //kiem tra ng dung da nhap muc dich chua
-                ,
-                child: Text(
-                  "Xác nhận",
-                  style: TextStyle(color: BackgroundColor, fontSize: 20),
-                )),
+              child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: size.width,
+              height: size.height * 0.05,
+              child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: PrimaryColor2,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                  onPressed: () {
+                    CreateAlertDialog(context);
+                  }
+                  //kiem tra ng dung da nhap muc dich chua
+                  ,
+                  child: Text(
+                    "Xác nhận",
+                    style: TextStyle(color: BackgroundColor, fontSize: 20),
+                  )),
+            ),
           ))
         ],
       ),

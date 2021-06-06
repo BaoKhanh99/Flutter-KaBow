@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kabow/Models/user.dart';
+import 'package:kabow/services/Service.dart';
 
 class AuthenService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -8,12 +9,19 @@ class AuthenService {
     return user != null ? Users(uid: user.uid) : null;
   }
 
+  Stream<Users> get userInfo {
+    return _auth.authStateChanges().map(_userFromFirebaseUser);
+  }
+
   //register with email and password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  Future registerWithEmailAndPassword(
+      String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
       User user = result.user;
+
+      await Service(uid: user.uid).updateUserData(name, 1999, 'address');
       return _userFromFirebaseUser(user);
     } catch (e) {}
   }

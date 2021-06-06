@@ -163,47 +163,51 @@ class _ButtonLoginState extends State<ButtonLogin> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      //padding: EdgeInsets.only(top: size.height*0.07, bottom: size.height*0.1),
-      child: Stack(alignment: Alignment.center, children: [
-        //image
-        Container(
-            width: size.width * 0.85,
-            height: size.height * 0.2,
-            child: Image.asset(
-              'assets/Images/location/bana.jpg',
-              fit: BoxFit.fitWidth,
-            )),
+    return Visibility(
+      visible: true,
+      child: Container(
+        //padding: EdgeInsets.only(top: size.height*0.07, bottom: size.height*0.1),
+        child: Stack(alignment: Alignment.center, children: [
+          //image
+          Container(
+              width: size.width * 0.85,
+              height: size.height * 0.2,
+              child: Image.asset(
+                'assets/Images/location/bana.jpg',
+                fit: BoxFit.fitWidth,
+              )),
 
-        //buttonlogin
-        Align(
-            alignment: Alignment.center,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                //crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    alignment: Alignment.center,
-                    child: FlatButton(
-                      height: 35,
-                      color: PrimaryColor2,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(6)),
-                      onPressed: () => print("hello"),
-                      child: Text(
-                        "Đăng nhập",
-                        style: TextStyle(color: BackgroundColor, fontSize: 28),
+          //buttonlogin
+          Align(
+              alignment: Alignment.center,
+              child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                  //crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      alignment: Alignment.center,
+                      child: FlatButton(
+                        height: 35,
+                        color: PrimaryColor2,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(6)),
+                        onPressed: () => print("hello"),
+                        child: Text(
+                          "Đăng nhập",
+                          style:
+                              TextStyle(color: BackgroundColor, fontSize: 28),
+                        ),
                       ),
                     ),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      "Để có thêm nhiều tính năng",
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        "Để có thêm nhiều tính năng",
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
                     ),
-                  ),
-                ])),
-      ]),
+                  ])),
+        ]),
+      ),
     );
   }
 }

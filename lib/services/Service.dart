@@ -4,6 +4,10 @@ import 'package:kabow/Models/comments.dart';
 import 'package:kabow/Models/LocationServices.dart';
 
 class Service {
+  final String uid;
+
+  Service({this.uid});
+
   FirebaseFirestore _db = FirebaseFirestore.instance;
 
   //Get location
@@ -107,6 +111,13 @@ class Service {
         .map((snapshot) => snapshot.docs
             .map((doc) => LocationService.fromJson(doc.data()))
             .toList());
+  }
+
+  //update user data
+  Future updateUserData(String name, int yob, String address) async {
+    return await _db
+        .doc(uid)
+        .set({'name': name, 'yob': yob, 'address': address});
   }
 }
 

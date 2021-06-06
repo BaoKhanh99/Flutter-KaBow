@@ -114,10 +114,10 @@ class Service {
   }
 
   //update user data
-  Future updateUserData(String name, int yob, String address) async {
+  Future updateUserData(String name, int phoneNumber, String address) async {
     return await _db
         .doc(uid)
-        .set({'name': name, 'yob': yob, 'address': address});
+        .set({'name': name, 'phoneNumber': phoneNumber, 'address': address});
   }
 }
 

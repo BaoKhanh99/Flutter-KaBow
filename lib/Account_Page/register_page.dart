@@ -6,6 +6,13 @@ class register_page extends StatefulWidget{
   _registerpageState createState() => _registerpageState();
 }
 class _registerpageState extends State<register_page>{
+  final _formKey = GlobalKey<FormState>();
+  bool _showpassword = true;
+  bool _showrepassword = true;
+  String email ="";
+  String password ="";
+  String repassword ="";
+  String  name ="";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -41,17 +48,97 @@ class _registerpageState extends State<register_page>{
               ),
             ),
           ),
-          buildContainer("Họ và tên"),
-          buildContainer("Email"),
-          buildContainer("Nhập mật khẩu"),
-          buildContainer("Nhập lại mật khẩu"),
+        Container(
+          alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+          child: Form(
+            key: _formKey,
+              child:
+              Column(
+                children:<Widget>[
+                  TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Nhập họ và tên",
+                        labelText: "Họ và tên",
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.black)
+                    ),
+                    validator: (val) => val.isEmpty ?"Nhập họ và tên":null,
+                    onChanged: (val){
+                      setState(() => name = val);
+                    },
+                  ),
+                  SizedBox(height: size.height*0.02,),
+                TextFormField(
+                  decoration: InputDecoration(
+                      hintText: "Nhập email",
+                      labelText: "Email",
+                      labelStyle: TextStyle(fontSize: 18, color: Colors.black)
+                  ),
+                  validator: (val) => val.isEmpty ?"Enter a email":null,
+                  onChanged: (val){
+                    setState(() => email = val);
+                  },
+                ),
+                  SizedBox(height: size.height*0.02,),
+                  TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Nhập mật khẩu",
+                        labelText: "Mật Khẩu",
+                        labelStyle: TextStyle(fontSize: 18, color: Colors.black),
+                      suffixIcon: IconButton(
+                          icon: Icon(Icons.remove_red_eye),
+                            color: Colors.grey,
+                      onPressed: (){
+                            setState(() {
+                              _showpassword = !_showpassword;
+                            });
+                      },
+                      ),
+                      ),
+                    obscureText: _showpassword,
+                    validator: (val) => val.length <6 ? "Cần ít nhất 6 kí tự":null,
+                    onChanged: (val){
+                      setState(() =>password = val);
+                    },
+                    ),
+                  SizedBox(height: size.height*0.02,),
+                  TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Nhập lại mật khẩu",
+                      labelText: "Nhập lại mật khẩu",
+                      labelStyle: TextStyle(fontSize: 18, color: Colors.black),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.remove_red_eye),
+                        color: Colors.grey,
+                        onPressed: (){
+                          setState(() {
+                            _showrepassword = !_showrepassword;
+                          });
+                        },
+                      ),
+                    ),
+                    obscureText: _showpassword,
+                    onChanged: ( val){
+                      setState(() => repassword = val);
+                    },
+                    validator: (val) => val != password ?"Mật khẩu không trùng khớp":null,
+                  ),
+
+                ]
+              )),
+        ),
           SizedBox(
             height:20,
           ),
           Center(
             child: Container(
                 child:RaisedButton(
-                  onPressed: (){},
+                  onPressed: () async{
+                    if (_formKey.currentState.validate()){
+                      print(email);
+                      print(password);
+                    }
+                  },
                   color: Color(0xff1b2536),
                   padding:  EdgeInsets.symmetric(horizontal: 80),
                   elevation: 2,
@@ -80,7 +167,7 @@ class _registerpageState extends State<register_page>{
                   ),
                 ),
                 GestureDetector(
-                  onTap: (){
+                  onTap: ()  {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => login_page()));
                   },
@@ -99,17 +186,6 @@ class _registerpageState extends State<register_page>{
         ],),),
     ],
     ),
-    );
-  }
-  Container buildContainer(String labeltext) {
-    return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: labeltext,
-        ),
-      ),
     );
   }
 }

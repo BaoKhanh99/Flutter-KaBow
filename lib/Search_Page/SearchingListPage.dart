@@ -84,6 +84,7 @@ class _LocationListState extends State<LocationList> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<Location> locationList = snapshot.data;
+            //searching location list
             return SliverList(
                 delegate: SliverChildBuilderDelegate(
               (context, index) {

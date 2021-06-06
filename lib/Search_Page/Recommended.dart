@@ -102,6 +102,7 @@ class _RecommendedState extends State<Recommended> {
   }
 }
 
+//title
 class TitleRecommended extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -152,6 +153,7 @@ class TitleRecommended extends StatelessWidget {
   }
 }
 
+//button login
 class ButtonLogin extends StatefulWidget {
   @override
   _ButtonLoginState createState() => _ButtonLoginState();
@@ -164,6 +166,7 @@ class _ButtonLoginState extends State<ButtonLogin> {
     return Container(
       //padding: EdgeInsets.only(top: size.height*0.07, bottom: size.height*0.1),
       child: Stack(alignment: Alignment.center, children: [
+        //image
         Container(
             width: size.width * 0.85,
             height: size.height * 0.2,
@@ -171,6 +174,8 @@ class _ButtonLoginState extends State<ButtonLogin> {
               'assets/Images/location/bana.jpg',
               fit: BoxFit.fitWidth,
             )),
+
+        //buttonlogin
         Align(
             alignment: Alignment.center,
             child: Column(mainAxisAlignment: MainAxisAlignment.center,

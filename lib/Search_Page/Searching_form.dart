@@ -101,6 +101,7 @@ class _SearchingState extends State<Searching_form> {
               horizontal: size.width * 0.07, vertical: size.height * 0.015),
           child: Column(
             children: [
+              //location field
               TextFormField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(
@@ -118,7 +119,7 @@ class _SearchingState extends State<Searching_form> {
                 controller: addressTf,
               ),
 
-              //button searching
+              //purpose and people field
               Row(
                 children: [
                   Container(
@@ -129,22 +130,7 @@ class _SearchingState extends State<Searching_form> {
                         bottom: size.width * 0.03),
                     child: Column(
                       children: [
-//                        TextFormField(
-//                          decoration: InputDecoration(
-//                              border: OutlineInputBorder(
-//                                  borderSide:
-//                                      BorderSide(color: PrimaryColor),
-//                                  borderRadius: BorderRadius.circular(5)),
-//                              hintText: "Mục đích",
-//                              contentPadding: EdgeInsets.symmetric(
-//                                  horizontal: 10, vertical: 8),
-//                              hintStyle: TextStyle(
-//                                  color: PrimaryColor.withOpacity(0.6),
-//                                  fontSize: 14),
-//                              filled: true,
-//                              fillColor: BackgroundColor),
-//                          style: TextStyle(fontSize: 18),
-//                        ),
+                        //purpose field
                         Container(
                           width: size.width * 0.48,
                           alignment: Alignment.center,
@@ -167,6 +153,8 @@ class _SearchingState extends State<Searching_form> {
                       ],
                     ),
                   ),
+
+                  //people field
                   Container(
                     width: size.width * 0.35,
                     child: Column(

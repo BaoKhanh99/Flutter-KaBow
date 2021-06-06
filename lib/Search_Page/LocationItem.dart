@@ -18,6 +18,7 @@ class _LocationItemState extends State<LocationItem> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Material(
+      //add function button
       child: InkWell(
         onTap: () {
           //print("object");
@@ -37,6 +38,7 @@ class _LocationItemState extends State<LocationItem> {
           //margin: const EdgeInsets.only(top: 10),
           child: Row(
             children: [
+              //image
               Expanded(
                 flex: 4,
                 child: Container(
@@ -47,6 +49,8 @@ class _LocationItemState extends State<LocationItem> {
                       fit: BoxFit.cover),
                 ),
               ),
+
+              //title and province location
               Expanded(
                 flex: 6,
                 child: Container(

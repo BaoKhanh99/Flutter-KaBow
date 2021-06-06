@@ -19,6 +19,7 @@ class _SearchingPageState extends State<SearchingPage> {
     final locationProvider = Provider.of<LocationProvider>(context);
 
     return Scaffold(
+      //app bar
       appBar: PreferredSize(
           preferredSize: Size.fromHeight(size.width * 0.3),
           child: AppBar(
@@ -36,26 +37,29 @@ class _SearchingPageState extends State<SearchingPage> {
             ),
             backgroundColor: BackgroundColor,
           )),
+      //body
       body: CustomScrollView(
         slivers: [
+          //searching form
           SliverToBoxAdapter(
             child: Searching_form(
               namePage: namePage,
             ),
           ),
+
+          // title recommended
           SliverToBoxAdapter(
             child: TitleRecommended(),
           ),
           StreamBuilder<List<Location>>(
               stream: locationProvider.locations,
               builder: (context, snapshot) {
-                //QuerySnapshot values = snapshot.data;
                 if (!snapshot.hasData) {
-                  //print(snapshot.error);
                   return SliverToBoxAdapter(
                     child: Text("no data ${snapshot.error}"),
                   );
                 } else {
+                  //recommeneded location list
                   return SliverGrid(
                       delegate: SliverChildBuilderDelegate((context, index) {
                         return Recommended(
@@ -70,6 +74,8 @@ class _SearchingPageState extends State<SearchingPage> {
                       ));
                 }
               }),
+
+          //button login
           SliverToBoxAdapter(
             child: ButtonLogin(),
           )

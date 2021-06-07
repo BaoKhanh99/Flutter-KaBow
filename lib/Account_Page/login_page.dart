@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/getpassword_page.dart';
 import 'package:kabow/Account_Page/register_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/services/auth.dart';
 
 class login_page extends StatefulWidget {
   @override
@@ -9,6 +10,12 @@ class login_page extends StatefulWidget {
 }
 
 class _loginpageState extends State<login_page> {
+  final AuthenService _auth = AuthenService();
+  final _formKey = GlobalKey<FormState>();
+  String email ="";
+  String password ="";
+  bool _showpassword = true;
+  String error ="";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -77,15 +84,70 @@ class _loginpageState extends State<login_page> {
                     ),
                   ),
                 ),
-                buildContainer("Email"),
-                buildContainer("Nhập mật khẩu"),
+//                buildContainer("Email"),
+//                buildContainer("Nhập mật khẩu"),
+              Container(
+                alignment: Alignment.center,
+                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    children: <Widget>[
+                      TextFormField(
+                        decoration: InputDecoration(
+                            hintText: "Nhập email",
+                            labelText: "Email",
+                            labelStyle: TextStyle(fontSize: 18, color: Colors.black)
+                        ),
+                        validator: (val) => val.isEmpty ?"Enter a email":null,
+                        onChanged: (val){
+                          setState(() => email = val);
+                        },
+                      ),
+                      SizedBox(height: size.height*0.01,),
+                      TextFormField(
+                        decoration: InputDecoration(
+                          hintText: "Nhập mật khẩu",
+                          labelText: "Mật Khẩu",
+                          labelStyle: TextStyle(fontSize: 18, color: Colors.black),
+                          suffixIcon: IconButton(
+                            icon: Icon(Icons.remove_red_eye),
+                            color: Colors.grey,
+                            onPressed: (){
+                              setState(() {
+                                _showpassword = !_showpassword;
+                              });
+                            },
+                          ),
+                        ),
+                        obscureText: _showpassword,
+                        validator: (val) => val.length <6 ? "Cần ít nhất 6 kí tự":null,
+                        onChanged: (val){
+                          setState(() =>password = val);
+                        },
+                      ),
+                      SizedBox(height: size.height*0.01,),
+                    ],
+                  ),
+                ),
+              ),
                 SizedBox(
                   height: 30,
                 ),
                 Center(
                   child: Container(
                       child: RaisedButton(
-                    onPressed: () {},
+                    onPressed: () async{
+                      if (_formKey.currentState.validate()){
+                        dynamic result = await _auth.signInEmailAndPassword(email, password);
+                        if(result == null){
+                          setState(() => error = "Không thể đăng nhập");
+                        }
+//                      else{
+//
+//                      }
+                      }
+                    },
                     color: PrimaryColor2,
                     padding: EdgeInsets.symmetric(horizontal: 80),
                     elevation: 2,
@@ -100,6 +162,18 @@ class _loginpageState extends State<login_page> {
                       ),
                     ),
                   )),
+                ),
+                SizedBox(
+                  height: size.height * 0.01,
+                ),
+                Center(
+                  child: Text(
+                    error,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.red,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: size.height * 0.02,

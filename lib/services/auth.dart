@@ -18,10 +18,12 @@ class AuthenService {
       String email, String password, String name) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password,);
+        email: email,
+        password: password,
+      );
       User user = result.user;
 
-      await Service(uid: user.uid).updateUserData(name, 0123456789, 'address');
+      await Service(uid: user.uid).updateUserData(name, 1990, 'address', 0);
       return _userFromFirebaseUser(user);
     } catch (e) {}
   }
@@ -37,9 +39,12 @@ class AuthenService {
   }
 
   //sign out
-  Future signOut() async {
+  Future<void> signOut() async {
     try {
       return await _auth.signOut();
-    } catch (e) {}
+    } catch (e) {
+      print(e.toString());
+      return null;
+    }
   }
 }

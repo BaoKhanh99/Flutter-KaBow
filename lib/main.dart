@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/foundation.dart';
 import 'package:kabow/Favorite_Page/FavoritePage.dart';
+import 'package:kabow/providers/AuthenticatedProvider.dart';
 import 'package:kabow/providers/LocationProvider.dart';
+import 'package:kabow/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'Search_Page/Searching_Page.dart';
 import 'Account_Page/Account_Page.dart';
@@ -50,8 +52,15 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => LocationProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => LocationProvider()),
+        StreamProvider.value(
+          value: AuthenService().userInfo,
+          //create: (context) => authenService.userInfo,
+          //initialData: null,
+        )
+      ],
       child: Scaffold(
         body: _listbtngbar[_currentIndex],
         bottomNavigationBar: BottomNavigationBar(

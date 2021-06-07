@@ -2,9 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
+import 'package:kabow/Models/user.dart';
 import 'package:kabow/Search_Page/LocationItem.dart';
 import 'package:kabow/Location_Page/LocationPage.dart';
+import 'package:kabow/providers/AuthenticatedProvider.dart';
 import 'package:kabow/providers/LocationProvider.dart';
+import 'package:kabow/services/auth.dart';
 import 'package:provider/provider.dart';
 
 class Recommended extends StatefulWidget {
@@ -163,8 +166,16 @@ class _ButtonLoginState extends State<ButtonLogin> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    bool showButtonLogin = true;
+    final authenticatedProvider = Provider.of<Users>(context);
+    if (authenticatedProvider == null) {
+      showButtonLogin = true;
+      print(authenticatedProvider);
+    } else {
+      showButtonLogin = false;
+    }
     return Visibility(
-      visible: true,
+      visible: showButtonLogin,
       child: Container(
         //padding: EdgeInsets.only(top: size.height*0.07, bottom: size.height*0.1),
         child: Stack(alignment: Alignment.center, children: [

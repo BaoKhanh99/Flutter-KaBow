@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Models/comments.dart';
 import 'package:kabow/Models/LocationServices.dart';
+import 'package:kabow/Models/user.dart';
 
 class Service {
   final String uid;
@@ -114,10 +115,32 @@ class Service {
   }
 
   //update user data
-  Future updateUserData(String name, int phoneNumber, String address) async {
-    return await _db.collection('user')
-        .doc(uid)
-        .set({'name': name, 'phoneNumber': phoneNumber, 'address': address});
+  Future updateUserData(
+      String name, int yob, String address, int phoneNumber) async {
+    return await _db.collection('user').doc(uid).set({
+      'name': name,
+      'yearOfBirth': yob,
+      'address': address,
+      'phoneNumber': phoneNumber
+    });
+  }
+
+  Stream<UserData> getUserData(String uid) {
+    return _db
+        .collection('user')
+        .doc('$uid')
+        .snapshots()
+        .map(_userDataFromSnapshot);
+  }
+
+  UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
+    Map data = snapshot.data();
+    return UserData(
+        uid: uid,
+        name: data['name'],
+        address: data['address'],
+        phoneNumber: data['phoneNumber'],
+        yob: data['yearOfBirth']);
   }
 }
 

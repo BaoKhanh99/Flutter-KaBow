@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/user.dart';
+import 'package:kabow/services/auth.dart';
+import 'package:provider/provider.dart';
 
 class Acount_Page extends StatefulWidget {
   @override
@@ -10,11 +13,17 @@ class Acount_Page extends StatefulWidget {
 }
 
 class _Acount_PageState extends State<Acount_Page> {
-  bool _Show = true;
-
-
+  bool _showLogin = true;
+  AuthenService authenService = AuthenService();
   @override
   Widget build(BuildContext context) {
+    final authenticatedProvider = Provider.of<Users>(context);
+    if (authenticatedProvider == null) {
+      _showLogin = true;
+    } else {
+      _showLogin = false;
+      print(authenticatedProvider.uid);
+    }
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
@@ -33,6 +42,8 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 30,
             ),
+
+            //account
             Row(
               children: [
                 Icon(
@@ -56,8 +67,10 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 10,
             ),
+
+            //info account
             Visibility(
-              visible: !_Show,
+              visible: !_showLogin,
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -84,8 +97,10 @@ class _Acount_PageState extends State<Acount_Page> {
                 ),
               ),
             ),
+
+            //change password
             Visibility(
-              visible: !_Show,
+              visible: !_showLogin,
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -136,8 +151,10 @@ class _Acount_PageState extends State<Acount_Page> {
                 ),
               ),
             ),
+
+            //sign in
             Visibility(
-              visible: _Show,
+              visible: _showLogin,
               child: Center(
                 child: RaisedButton(
                   color: PrimaryColor2,
@@ -148,7 +165,7 @@ class _Acount_PageState extends State<Acount_Page> {
                     Navigator.of(context).push(MaterialPageRoute(
                         builder: (BuildContext context) => login_page()));
                     setState(() {
-                      _Show = !_Show;
+                      _showLogin = _showLogin;
                     });
                   },
                   child: Text(
@@ -162,6 +179,8 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 30,
             ),
+
+            //settings
             Row(
               children: [
                 Icon(
@@ -185,6 +204,8 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 10,
             ),
+
+            //list settings
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -445,18 +466,19 @@ class _Acount_PageState extends State<Acount_Page> {
             SizedBox(
               height: 7,
             ),
+
+            //sign out
             Visibility(
-              visible: !_Show,
+              visible: !_showLogin,
               child: Center(
                 child: RaisedButton(
                   color: PrimaryColor2,
                   padding: EdgeInsets.symmetric(horizontal: 40),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  onPressed: () {
-                    setState(() {
-                      _Show = !_Show;
-                    });
+                  onPressed: () async {
+                    await authenService.signOut();
+                    print("object");
                   },
                   child: Text(
                     "ĐĂNG XUẤT",

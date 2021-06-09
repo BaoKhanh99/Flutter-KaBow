@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:kabow/Models/user.dart';
 import 'package:kabow/services/Service.dart';
@@ -46,4 +48,14 @@ class AuthenService {
       return null;
     }
   }
+//  Future<bool> validatePassword(String password)async{
+//    var firebaseUser = await _auth.currentUser;
+//
+//  var authCredentials = EmailAuthProvider.credential(
+//    email: firebaseUser.email,
+//    password: password
+//  );
+//   var authresult = await firebaseUser.reauthenticateWithCredential(authCredentials);
+//   authresult.user != null;
+//  }
 }

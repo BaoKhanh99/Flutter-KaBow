@@ -121,7 +121,7 @@ class Service {
       'name': name,
       'yearOfBirth': yob,
       'address': address,
-      'phoneNumber': phoneNumber
+      'phoneNumber': phoneNumber,
     });
   }
 

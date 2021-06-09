@@ -449,6 +449,102 @@ class _Acount_PageState extends State<Acount_Page> {
                 ),
               ),
             ),
+            //notification
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("THÔNG BÁO"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],
+                        ),
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "CHÍNH SÁCH BẢO MẬT",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Color(0xff1b2536),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            //Offerd service
+            GestureDetector(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text("DỊCH VỤ ĐÃ ĐẶT"),
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("OP1"),
+                            Text("OP2"),
+                            Text("OP3"),
+                            Text("OP4"),
+                          ],
+                        ),
+                        actions: [
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: Text("Close"),
+                          ),
+                        ],
+                      );
+                    });
+              },
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "CHÍNH SÁCH BẢO MẬT",
+                      style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black87),
+                    ),
+                    Icon(
+                      Icons.arrow_forward,
+                      color: Color(0xff1b2536),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             SizedBox(
               height: 7,
             ),

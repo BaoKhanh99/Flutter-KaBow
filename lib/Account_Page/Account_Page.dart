@@ -501,9 +501,19 @@ class _GetUserNameState extends State<GetUserName> {
           );
         } else {
           UserData userData = snapshot.data;
-          return Container(
-            child: Text("${userData.name}"),
-          );
+          if (userData == null) {
+            return Container();
+          } else {
+            return Container(
+              child: Text(
+                "XIN CHÀO ${userData.name} !",
+                style: TextStyle(
+                    color: PrimaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
+              ),
+            );
+          }
         }
       },
     );

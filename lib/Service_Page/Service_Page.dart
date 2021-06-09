@@ -52,6 +52,7 @@ class ServiceList extends StatefulWidget {
 class _ServiceListState extends State<ServiceList> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     final serviceProvider = Provider.of<ServiceProvider>(context);
     return StreamBuilder(
         stream: CombineLatestStream.list([
@@ -74,9 +75,7 @@ class _ServiceListState extends State<ServiceList> {
           } else {
             //print("object");
             return SliverToBoxAdapter(
-              child: Container(
-                child: Text("${snapshot.error}"),
-              ),
+              child: Container(),
             );
           }
         });

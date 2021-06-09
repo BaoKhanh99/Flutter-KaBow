@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/getpassword_page.dart';
 import 'package:kabow/Account_Page/register_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
+import 'package:kabow/Models/user.dart';
 import 'package:kabow/services/auth.dart';
 
 class login_page extends StatefulWidget {
@@ -12,54 +13,18 @@ class login_page extends StatefulWidget {
 class _loginpageState extends State<login_page> {
   final AuthenService _auth = AuthenService();
   final _formKey = GlobalKey<FormState>();
-  String email ="";
-  String password ="";
+  String email = "";
+  String password = "";
   bool _showpassword = true;
-  String error ="";
+  String error = "";
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     // TODO: implement build
     return Scaffold(
       body: CustomScrollView(
-//        child:
-//          Center(
-//            child: Visibility(
-//              visible: isVisible,
-//              child: RaisedButton(
-//                onPressed: () => setState(() {
-//                  isVisible =!isVisible;
-//                },
-//                ),
-//                color: Color(0xff1b2536),
-//                padding:  EdgeInsets.symmetric(horizontal: 80),
-//                elevation: 2,
-//                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-//                child:
-//                Text("LƯU",
-//                  style: TextStyle(
-//                    fontSize: 14,
-//                    color: Colors.white,
-//                    letterSpacing: 2.2,
-//                  ),),),
-//            ),
-//
-//          )
         slivers: [
-          SliverAppBar(
-//          backgroundColor: Colors.white,
-//          //expandedHeight: 300,
-//          floating: true,
-//          pinned: true,
-//          toolbarHeight: size.height * 0.11,
-//          title: Image.asset(
-//            'assets/Images/logo.png',
-//            height: size.height * 0.09,
-//          ),
-//          centerTitle: true,
-//          automaticallyImplyLeading: false,
-//        title: Text("Đăng Nhập"),
-              ),
+          SliverAppBar(),
           SliverToBoxAdapter(
             child: Container(
               margin: EdgeInsets.only(top: size.height * 0.03),
@@ -84,68 +49,75 @@ class _loginpageState extends State<login_page> {
                     ),
                   ),
                 ),
-//                buildContainer("Email"),
-//                buildContainer("Nhập mật khẩu"),
-              Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    children: <Widget>[
-                      TextFormField(
-                        decoration: InputDecoration(
-                            hintText: "Nhập email",
-                            labelText: "Email",
-                            labelStyle: TextStyle(fontSize: 18, color: Colors.black)
+                Container(
+                  alignment: Alignment.center,
+                  margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      children: <Widget>[
+                        TextFormField(
+                          decoration: InputDecoration(
+                              hintText: "Nhập email",
+                              labelText: "Email",
+                              labelStyle:
+                                  TextStyle(fontSize: 18, color: Colors.black)),
+                          validator: (val) =>
+                              val.isEmpty ? "Enter a email" : null,
+                          onChanged: (val) {
+                            setState(() => email = val);
+                          },
                         ),
-                        validator: (val) => val.isEmpty ?"Enter a email":null,
-                        onChanged: (val){
-                          setState(() => email = val);
-                        },
-                      ),
-                      SizedBox(height: size.height*0.01,),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          hintText: "Nhập mật khẩu",
-                          labelText: "Mật Khẩu",
-                          labelStyle: TextStyle(fontSize: 18, color: Colors.black),
-                          suffixIcon: IconButton(
-                            icon: Icon(Icons.remove_red_eye),
-                            color: Colors.grey,
-                            onPressed: (){
-                              setState(() {
-                                _showpassword = !_showpassword;
-                              });
-                            },
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            hintText: "Nhập mật khẩu",
+                            labelText: "Mật Khẩu",
+                            labelStyle:
+                                TextStyle(fontSize: 18, color: Colors.black),
+                            suffixIcon: IconButton(
+                              icon: Icon(Icons.remove_red_eye),
+                              color: Colors.grey,
+                              onPressed: () {
+                                setState(() {
+                                  _showpassword = !_showpassword;
+                                });
+                              },
+                            ),
                           ),
+                          obscureText: _showpassword,
+                          validator: (val) =>
+                              val.length < 6 ? "Cần ít nhất 6 kí tự" : null,
+                          onChanged: (val) {
+                            setState(() => password = val);
+                          },
                         ),
-                        obscureText: _showpassword,
-                        validator: (val) => val.length <6 ? "Cần ít nhất 6 kí tự":null,
-                        onChanged: (val){
-                          setState(() =>password = val);
-                        },
-                      ),
-                      SizedBox(height: size.height*0.01,),
-                    ],
+                        SizedBox(
+                          height: size.height * 0.01,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
                 SizedBox(
                   height: 30,
                 ),
                 Center(
                   child: Container(
                       child: RaisedButton(
-                    onPressed: () async{
-                      if (_formKey.currentState.validate()){
-                        dynamic result = await _auth.signInEmailAndPassword(email, password);
-                        if(result == null){
+                    onPressed: () async {
+                      if (_formKey.currentState.validate()) {
+                        print(email);
+                        dynamic result =
+                            await _auth.signInEmailAndPassword(email, password);
+                        if (result == null) {
                           setState(() => error = "Không thể đăng nhập");
+                        } else {
+                          Navigator.of(context).pop();
+                          Navigator.of(context).pop();
                         }
-//                      else{
-//
-//                      }
                       }
                     },
                     color: PrimaryColor2,

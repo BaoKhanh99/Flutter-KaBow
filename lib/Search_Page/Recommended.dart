@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Models/user.dart';
@@ -201,7 +202,10 @@ class _ButtonLoginState extends State<ButtonLogin> {
                         color: PrimaryColor2,
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(6)),
-                        onPressed: () => print("hello"),
+                        onPressed: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (BuildContext context) =>
+                                    login_page())),
                         child: Text(
                           "Đăng nhập",
                           style:

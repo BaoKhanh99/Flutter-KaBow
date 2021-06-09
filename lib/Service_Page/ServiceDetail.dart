@@ -126,14 +126,12 @@ class _ServiceInformationState extends State<ServiceInformation> {
   List<Bed> _bed = Bed.getBed();
   List<DropdownMenuItem<Bed>> _dropdownBedItem;
   Bed _selectedBed;
-
+  bool showButtonConfirm = true;
   List<Time> _time = Time.getTime();
   List<DropdownMenuItem<Time>> _dropdownTimeItem;
   Time _selectedTime;
 
   final myController = TextEditingController();
-
-  bool showButtonConfirm = true;
 
   int totalPrice = 0;
 
@@ -267,7 +265,6 @@ class _ServiceInformationState extends State<ServiceInformation> {
         });
   }
 
-  // cancel service
   cancelServiceAlertDialog(BuildContext context) {
     final auth = Provider.of<Users>(context, listen: false);
     return showDialog(
@@ -290,67 +287,69 @@ class _ServiceInformationState extends State<ServiceInformation> {
         });
   }
 
-  Future<bool> aaaaa(serviceId) async {
-    final auth = Provider.of<Users>(context);
-    showButtonConfirm =
-        await Service(uid: auth.uid).checkOrderService(serviceId);
-  }
-
   //check order
   Widget checkOrder(int serviceId) {
     final auth = Provider.of<Users>(context);
-    aaaaa(serviceId);
+
     Size size = MediaQuery.of(context).size;
-    print('show button confirm $showButtonConfirm');
-    return (showButtonConfirm)
-        ? Center(
-            child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: size.width,
-              height: size.height * 0.05,
-              child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      backgroundColor: PrimaryColor2,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  onPressed: () {
-                    if (auth == null) {
-                      signInAlertDialog(context);
-                    } else {
-                      confirmAlertDialog(context);
-                    }
-                  }
-                  //kiem tra ng dung da nhap muc dich chua
-                  ,
-                  child: Text(
-                    "Xác nhận",
-                    style: TextStyle(color: BackgroundColor, fontSize: 20),
-                  )),
-            ),
-          ))
-        : Center(
-            child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: size.width,
-              height: size.height * 0.05,
-              child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      backgroundColor: Colors.grey,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  onPressed: () {
-                    cancelServiceAlertDialog(context);
-                  }
-                  //kiem tra ng dung da nhap muc dich chua
-                  ,
-                  child: Text(
-                    "HỦY",
-                    style: TextStyle(color: PrimaryColor, fontSize: 20),
-                  )),
-            ),
-          ));
+
+    return FutureBuilder<bool>(
+        future: Service(uid: auth.uid).checkOrderService(serviceId),
+        builder: (context, snapshot) {
+          showButtonConfirm = !snapshot.data;
+          return (showButtonConfirm)
+              ? Center(
+                  child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: size.width,
+                    height: size.height * 0.05,
+                    child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: PrimaryColor2,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)))),
+                        onPressed: () {
+                          if (auth == null) {
+                            signInAlertDialog(context);
+                          } else {
+                            confirmAlertDialog(context);
+                          }
+                        }
+                        //kiem tra ng dung da nhap muc dich chua
+                        ,
+                        child: Text(
+                          "Xác nhận",
+                          style:
+                              TextStyle(color: BackgroundColor, fontSize: 20),
+                        )),
+                  ),
+                ))
+              : Center(
+                  child: Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Container(
+                    width: size.width,
+                    height: size.height * 0.05,
+                    child: OutlinedButton(
+                        style: OutlinedButton.styleFrom(
+                            backgroundColor: Colors.grey,
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(5)))),
+                        onPressed: () {
+                          cancelServiceAlertDialog(context);
+                        }
+                        //kiem tra ng dung da nhap muc dich chua
+                        ,
+                        child: Text(
+                          "HỦY",
+                          style: TextStyle(color: PrimaryColor, fontSize: 20),
+                        )),
+                  ),
+                ));
+        });
   }
 
   @override

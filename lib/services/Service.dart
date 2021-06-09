@@ -125,7 +125,8 @@ class Service {
     });
   }
 
-  Stream<UserData> getUserData(String uid) {
+  Stream<UserData> getUserData() {
+    print("uid: $uid");
     return _db
         .collection('user')
         .doc('$uid')
@@ -138,9 +139,19 @@ class Service {
     return UserData(
         uid: uid,
         name: data['name'],
-        address: data['address'],
+        yob: data['yearOfBirth'],
         phoneNumber: data['phoneNumber'],
-        yob: data['yearOfBirth']);
+        address: data['address']);
+  }
+
+  Stream<List<Location>> getFavoriteList() {
+    return _db
+        .collection('user')
+        .doc("$uid")
+        .collection("favoriteLocation")
+        .snapshots()
+        .map((snapshot) =>
+            snapshot.docs.map((doc) => Location.fromJson(doc.data())).toList());
   }
 }
 

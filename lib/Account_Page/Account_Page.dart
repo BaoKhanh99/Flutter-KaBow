@@ -4,6 +4,7 @@ import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/user.dart';
+import 'package:kabow/services/Service.dart';
 import 'package:kabow/services/auth.dart';
 import 'package:provider/provider.dart';
 
@@ -18,11 +19,16 @@ class _Acount_PageState extends State<Acount_Page> {
   @override
   Widget build(BuildContext context) {
     final authenticatedProvider = Provider.of<Users>(context);
+    String a;
+    Widget getUserName;
     if (authenticatedProvider == null) {
       _showLogin = true;
     } else {
       _showLogin = false;
-      print(authenticatedProvider.uid);
+      a = authenticatedProvider.uid;
+      getUserName = GetUserName(
+        uid: a,
+      );
     }
     Size size = MediaQuery.of(context).size;
     return Scaffold(
@@ -39,8 +45,12 @@ class _Acount_PageState extends State<Acount_Page> {
         padding: EdgeInsets.only(left: 16, top: 25, right: 16),
         child: ListView(
           children: [
-            SizedBox(
-              height: 30,
+            Padding(
+              padding: EdgeInsets.only(
+                  top: size.height * 0.01,
+                  bottom: size.height * 0.03,
+                  left: size.height * 0.01),
+              child: getUserName,
             ),
 
             //account
@@ -105,30 +115,6 @@ class _Acount_PageState extends State<Acount_Page> {
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
                       builder: (BuildContext context) => login_page()));
-//                showDialog(
-//                    context: context,
-//                    builder: (BuildContext context) {
-//                      return AlertDialog(
-//                        title: Text("ĐỔI MẬT KHẨU"),
-//                        content: Column(
-//                          mainAxisSize: MainAxisSize.min,
-//                          children: [
-//                            Text("OP1"),
-//                            Text("OP2"),
-//                            Text("OP3"),
-//                            Text("OP4"),
-//                          ],
-//                        ),
-//                        actions: [
-//                          FlatButton(
-//                            onPressed: () {
-//                              Navigator.of(context).pop();
-//                            },
-//                            child: Text("Close"),
-//                          ),
-//                        ],
-//                      );
-//                    });
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -491,6 +477,35 @@ class _Acount_PageState extends State<Acount_Page> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class GetUserName extends StatefulWidget {
+  final String uid;
+  GetUserName({this.uid});
+
+  @override
+  _GetUserNameState createState() => _GetUserNameState();
+}
+
+class _GetUserNameState extends State<GetUserName> {
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+      stream: Service(uid: widget.uid).getUserData(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return Container(
+            child: Text('${snapshot.error}'),
+          );
+        } else {
+          UserData userData = snapshot.data;
+          return Container(
+            child: Text("${userData.name}"),
+          );
+        }
+      },
     );
   }
 }

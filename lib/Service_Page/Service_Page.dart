@@ -15,30 +15,27 @@ class _ServicePageState extends State<ServicePage> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider(
-      create: (context) => ServiceProvider(),
-      child: Scaffold(
-        body: SafeArea(
-          child: CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                backgroundColor: BackgroundColor,
-                //expandedHeight: 300,
-                floating: true,
-                pinned: true,
-                toolbarHeight: size.height * 0.11,
-                title: Image.asset(
-                  'assets/Images/logo.png',
-                  height: size.height * 0.09,
-                ),
-                centerTitle: true,
-                automaticallyImplyLeading: false,
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              backgroundColor: BackgroundColor,
+              //expandedHeight: 300,
+              floating: true,
+              pinned: true,
+              toolbarHeight: size.height * 0.11,
+              title: Image.asset(
+                'assets/Images/logo.png',
+                height: size.height * 0.09,
               ),
-              SliverPadding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  sliver: ServiceList())
-            ],
-          ),
+              centerTitle: true,
+              automaticallyImplyLeading: false,
+            ),
+            SliverPadding(
+                padding: EdgeInsets.symmetric(vertical: 10),
+                sliver: ServiceList())
+          ],
         ),
       ),
     );

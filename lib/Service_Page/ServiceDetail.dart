@@ -4,10 +4,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/Location.dart';
 import 'package:kabow/Location_Page/CommentLocationPage.dart';
 import 'package:kabow/Models/LocationServices.dart';
+import 'package:kabow/Models/user.dart';
 import 'package:kabow/Service_Page/dropdownService.dart';
 import 'package:kabow/providers/ServiceProvider.dart';
 import 'package:provider/provider.dart';
@@ -27,65 +29,62 @@ class _ServiceDetailState extends State<ServiceDetail> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return ChangeNotifierProvider(
-      create: (context) => ServiceProvider(),
-      child: Scaffold(
-          body: SafeArea(
-        child: CustomScrollView(
-          slivers: [
-            //appbar
-            SliverAppBar(
-              title: Text("${widget.locationService.name}"),
-              actions: [
-                PopupMenuButton(itemBuilder: (context) {
-                  return <PopupMenuEntry>[
-                    new PopupMenuItem(
-                        child: new TextButton(
-                            onPressed: () => print("report"),
-                            child: new Text("report")))
-                  ];
-                })
-              ],
-            ),
+    return Scaffold(
+        body: SafeArea(
+      child: CustomScrollView(
+        slivers: [
+          //appbar
+          SliverAppBar(
+            title: Text("${widget.locationService.name}"),
+            actions: [
+              PopupMenuButton(itemBuilder: (context) {
+                return <PopupMenuEntry>[
+                  new PopupMenuItem(
+                      child: new TextButton(
+                          onPressed: () => print("report"),
+                          child: new Text("report")))
+                ];
+              })
+            ],
+          ),
 
-            //image service
-            SliverToBoxAdapter(
-                child: Container(
-                    height: 250,
-                    width: size.width,
-                    child: ImageCarousel(
-                      images: widget.locationService.images[0],
-                    ))),
-
-            //service infor
-            SliverToBoxAdapter(
-                child: ServiceInformation(
-              locationService: widget.locationService,
-            )),
-
-            //dich vu khac
-            SliverToBoxAdapter(
+          //image service
+          SliverToBoxAdapter(
               child: Container(
-                padding: EdgeInsets.all(10),
-                child: Text(
-                  "Các dịch vụ khác",
-                  style: TextStyle(
-                      color: PrimaryColor,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold),
-                ),
+                  height: 250,
+                  width: size.width,
+                  child: ImageCarousel(
+                    images: widget.locationService.images[0],
+                  ))),
+
+          //service infor
+          SliverToBoxAdapter(
+              child: ServiceInformation(
+            locationService: widget.locationService,
+          )),
+
+          //dich vu khac
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.all(10),
+              child: Text(
+                "Các dịch vụ khác",
+                style: TextStyle(
+                    color: PrimaryColor,
+                    fontSize: 25,
+                    fontWeight: FontWeight.bold),
               ),
             ),
+          ),
 
-            //service recommended
-            ServiceRecommended(
-              provinceId: widget.locationService.provinceId,
-              id: widget.locationService.id,
-            )
-          ],
-        ),
-      )),
-    );
+          //service recommended
+          ServiceRecommended(
+            provinceId: widget.locationService.provinceId,
+            id: widget.locationService.id,
+          )
+        ],
+      ),
+    ));
   }
 }
 
@@ -135,7 +134,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
   List<DropdownMenuItem<Time>> _dropdownTimeItem;
   Time _selectedTime;
 
-  CreateAlertDialog(BuildContext context) {
+  ConfirmAlertDialog(BuildContext context) {
     final moneyFormat =
         NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
     return showDialog(
@@ -150,6 +149,29 @@ class _ServiceInformationState extends State<ServiceInformation> {
                     color: PrimaryColor2,
                     onPressed: () => print("Yes"),
                     child: Text("Đồng ý")),
+                FlatButton(
+                    onPressed: () => Navigator.pop(context), child: Text("Huỷ"))
+              ]);
+        });
+  }
+
+  SignInAlertDialog(BuildContext context) {
+    final moneyFormat =
+        NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text("Bạn chưa đăng nhập !"),
+              content: Text("Bạn cần đăng nhập để thực hiện dịch vụ này "),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () =>
+                        Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => login_page(),
+                        )),
+                    child: Text("Đăng nhập")),
                 FlatButton(
                     onPressed: () => Navigator.pop(context), child: Text("Huỷ"))
               ]);
@@ -252,6 +274,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
         widget.locationService.foodService == true ? "có" : "không";
     String washingMachine =
         widget.locationService.washingMachine == true ? "có" : "không";
+    final auth = Provider.of<Users>(context);
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -419,7 +442,11 @@ class _ServiceInformationState extends State<ServiceInformation> {
                       shape: const RoundedRectangleBorder(
                           borderRadius: BorderRadius.all(Radius.circular(5)))),
                   onPressed: () {
-                    CreateAlertDialog(context);
+                    if (auth == null) {
+                      SignInAlertDialog(context);
+                    } else {
+                      ConfirmAlertDialog(context);
+                    }
                   }
                   //kiem tra ng dung da nhap muc dich chua
                   ,

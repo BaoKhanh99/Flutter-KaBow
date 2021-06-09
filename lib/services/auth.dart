@@ -22,7 +22,6 @@ class AuthenService {
         password: password,
       );
       User user = result.user;
-
       await Service(uid: user.uid).updateUserData(name, 1990, 'address', 0);
       return _userFromFirebaseUser(user);
     } catch (e) {}

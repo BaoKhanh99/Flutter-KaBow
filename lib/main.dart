@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:kabow/Favorite_Page/FavoritePage.dart';
 import 'package:kabow/providers/AuthenticatedProvider.dart';
 import 'package:kabow/providers/LocationProvider.dart';
+import 'package:kabow/providers/ServiceProvider.dart';
 import 'package:kabow/services/auth.dart';
 import 'package:provider/provider.dart';
 import 'Search_Page/Searching_Page.dart';
@@ -21,13 +22,22 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'KaBow',
-      theme: ThemeData(
-        primarySwatch: PrimaryColor,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => LocationProvider()),
+        StreamProvider.value(value: AuthenService().userInfo),
+        ChangeNotifierProvider(
+          create: (context) => ServiceProvider(),
+        ),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'KaBow',
+        theme: ThemeData(
+          primarySwatch: PrimaryColor,
+        ),
+        home: MyHomePage(title: 'KaBow App'),
       ),
-      home: MyHomePage(title: 'KaBow App'),
     );
   }
 }
@@ -50,50 +60,47 @@ class _MyHomePageState extends State<MyHomePage> {
     Acount_Page(),
   ];
 
+// MultiProvider(
+//       providers: [
+//
+//
+
+//       ],
+
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => LocationProvider()),
-        StreamProvider.value(
-          value: AuthenService().userInfo,
-          //create: (context) => authenService.userInfo,
-          //initialData: null,
-        )
-      ],
-      child: Scaffold(
-        body: _listbtngbar[_currentIndex],
-        bottomNavigationBar: BottomNavigationBar(
-          currentIndex: _currentIndex,
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.search),
-              title: Text('Search'),
-              backgroundColor: Colors.orange,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.key),
-              title: Text('Reserve'),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.solidHeart),
-              title: Text('Favorite'),
-              backgroundColor: Colors.orange,
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(FontAwesomeIcons.solidUser),
-              title: Text('Account'),
-              backgroundColor: Colors.orange,
-            ),
-          ],
-          onTap: (index) {
-            setState(() {
-              _currentIndex = index;
-            });
-          },
-        ),
+    return Scaffold(
+      body: _listbtngbar[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        type: BottomNavigationBarType.fixed,
+        backgroundColor: Colors.white,
+        items: [
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.search),
+            title: Text('Search'),
+            backgroundColor: Colors.orange,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.key),
+            title: Text('Reserve'),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.solidHeart),
+            title: Text('Favorite'),
+            backgroundColor: Colors.orange,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(FontAwesomeIcons.solidUser),
+            title: Text('Account'),
+            backgroundColor: Colors.orange,
+          ),
+        ],
+        onTap: (index) {
+          setState(() {
+            _currentIndex = index;
+          });
+        },
       ),
     );
   }

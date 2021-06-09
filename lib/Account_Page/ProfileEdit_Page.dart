@@ -166,57 +166,57 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                             SizedBox(
                               height: size.height * 0.015,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: <Widget>[
-                                Icon(Icons.email_rounded),
-                                SizedBox(
-                                  width: size.width * 0.7,
-                                  child: TextFormField(
-                                    enabled: _enemail,
-                                    decoration: InputDecoration(
-                                      hintText: "Email từ database",
-                                      floatingLabelBehavior:
-                                          FloatingLabelBehavior.always,
-                                      labelText: "Email",
-                                      labelStyle: TextStyle(
-                                        color: Color(0xff1b2536),
-                                        fontSize: 18,
-                                      ),
-                                      hintStyle: TextStyle(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xff1b2536),
-                                      ),
-                                      enabledBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Colors.white,
-                                          width: 2.0,
-                                        ),
-                                      ),
-                                      focusedBorder: OutlineInputBorder(
-                                        borderSide: BorderSide(
-                                          color: Color(0xff1b2536),
-                                          width: 2.0,
-                                        ),
-                                      ),
-                                    ),
-                                    validator: (val) => val.length < 6
-                                        ? "Cần ít nhất 6 kí tự"
-                                        : null,
-                                    onChanged: (val) {
-                                      setState(() => email = val);
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: size.width * 0.11,
-                                )
-                              ],
-                            ),
-                            SizedBox(
-                              height: size.height * 0.015,
-                            ),
+//                            Row(
+//                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//                              children: <Widget>[
+//                                Icon(Icons.email_rounded),
+//                                SizedBox(
+//                                  width: size.width * 0.7,
+//                                  child: TextFormField(
+//                                    enabled: _enemail,
+//                                    decoration: InputDecoration(
+//                                      hintText: "Email từ database",
+//                                      floatingLabelBehavior:
+//                                          FloatingLabelBehavior.always,
+//                                      labelText: "Email",
+//                                      labelStyle: TextStyle(
+//                                        color: Color(0xff1b2536),
+//                                        fontSize: 18,
+//                                      ),
+//                                      hintStyle: TextStyle(
+//                                        fontSize: 18,
+//                                        fontWeight: FontWeight.bold,
+//                                        color: Color(0xff1b2536),
+//                                      ),
+//                                      enabledBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                          color: Colors.white,
+//                                          width: 2.0,
+//                                        ),
+//                                      ),
+//                                      focusedBorder: OutlineInputBorder(
+//                                        borderSide: BorderSide(
+//                                          color: Color(0xff1b2536),
+//                                          width: 2.0,
+//                                        ),
+//                                      ),
+//                                    ),
+//                                    validator: (val) => val.length < 6
+//                                        ? "Cần ít nhất 6 kí tự"
+//                                        : null,
+//                                    onChanged: (val) {
+//                                      setState(() => email = val);
+//                                    },
+//                                  ),
+//                                ),
+//                                SizedBox(
+//                                  width: size.width * 0.11,
+//                                )
+//                              ],
+//                            ),
+//                            SizedBox(
+//                              height: size.height * 0.015,
+//                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[

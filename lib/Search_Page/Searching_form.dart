@@ -212,10 +212,14 @@ class _SearchingState extends State<Searching_form> {
                                         numberPeople: checkNumberPeople,
                                       )));
                         } else {
-                          LocationList(
-                              numberPeople: checkNumberPeople,
-                              province: checkAddress,
-                              purpose: checkPurpose);
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SearchingListPage(
+                                        province: checkAddress,
+                                        purpose: checkPurpose,
+                                        numberPeople: checkNumberPeople,
+                                      )));
                         }
                       }
                     }

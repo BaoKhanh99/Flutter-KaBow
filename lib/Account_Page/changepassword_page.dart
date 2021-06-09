@@ -48,9 +48,7 @@ class _changepasswordState extends State<changepassword_page>{
               SizedBox(
                 height: size.height*0.02,
               ),
-              buildContainer("Nhập mật khẩu cũ"),
-              buildContainer("Nhập mật khẩu mới"),
-              buildContainer("Nhập lại mật khẩu mới"),
+
               SizedBox(
                 height:20,
               ),
@@ -78,17 +76,6 @@ class _changepasswordState extends State<changepassword_page>{
 
             ],),),
         ],
-      ),
-    );
-  }
-  Container buildContainer(String labeltext) {
-    return Container(
-      alignment: Alignment.center,
-      margin: EdgeInsets.symmetric(horizontal: 25, vertical: 8),
-      child: TextField(
-        decoration: InputDecoration(
-          labelText: labeltext,
-        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/user.dart';
 import 'package:kabow/services/Service.dart';
 
@@ -26,6 +27,25 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
   String diachi = "";
   String error = "";
   int namsinh = 1990;
+
+  successUpdateAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(title: Text("Bạn đã cập nhật thành công!"),
+              //content: Text("Bạn cần đăng nhập để thực hiện dịch vụ này "),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () {
+                      setState(() {});
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Tiếp tục")),
+              ]);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -76,7 +96,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                               bottom: 0,
                               right: 0,
                               child: Opacity(
-                                opacity: !_showedit ?  0:1,
+                                opacity: !_showedit ? 0 : 1,
                                 child: Container(
                                   height: 40,
                                   width: 40,
@@ -159,7 +179,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                   ),
                                 ),
                                 Opacity(
-                                  opacity: !_showedit ?  0:1,
+                                  opacity: !_showedit ? 0 : 1,
                                   child: IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -173,57 +193,6 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                             SizedBox(
                               height: size.height * 0.015,
                             ),
-//                            Row(
-//                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-//                              children: <Widget>[
-//                                Icon(Icons.email_rounded),
-//                                SizedBox(
-//                                  width: size.width * 0.7,
-//                                  child: TextFormField(
-//                                    enabled: _enemail,
-//                                    decoration: InputDecoration(
-//                                      hintText: "Email từ database",
-//                                      floatingLabelBehavior:
-//                                          FloatingLabelBehavior.always,
-//                                      labelText: "Email",
-//                                      labelStyle: TextStyle(
-//                                        color: Color(0xff1b2536),
-//                                        fontSize: 18,
-//                                      ),
-//                                      hintStyle: TextStyle(
-//                                        fontSize: 18,
-//                                        fontWeight: FontWeight.bold,
-//                                        color: Color(0xff1b2536),
-//                                      ),
-//                                      enabledBorder: OutlineInputBorder(
-//                                        borderSide: BorderSide(
-//                                          color: Colors.white,
-//                                          width: 2.0,
-//                                        ),
-//                                      ),
-//                                      focusedBorder: OutlineInputBorder(
-//                                        borderSide: BorderSide(
-//                                          color: Color(0xff1b2536),
-//                                          width: 2.0,
-//                                        ),
-//                                      ),
-//                                    ),
-//                                    validator: (val) => val.length < 6
-//                                        ? "Cần ít nhất 6 kí tự"
-//                                        : null,
-//                                    onChanged: (val) {
-//                                      setState(() => email = val);
-//                                    },
-//                                  ),
-//                                ),
-//                                SizedBox(
-//                                  width: size.width * 0.11,
-//                                )
-//                              ],
-//                            ),
-//                            SizedBox(
-//                              height: size.height * 0.015,
-//                            ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: <Widget>[
@@ -263,12 +232,13 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         ? "Cần ít nhất 6 kí tự"
                                         : null,
                                     onChanged: (val) {
-                                      setState(() => sodienthoai = val as int);
+                                      setState(
+                                          () => sodienthoai = int.parse(val));
                                     },
                                   ),
                                 ),
                                 Opacity(
-                                  opacity: !_showedit ?  0:1,
+                                  opacity: !_showedit ? 0 : 1,
                                   child: IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -326,7 +296,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                   ),
                                 ),
                                 Opacity(
-                                  opacity: !_showedit ?  0:1,
+                                  opacity: !_showedit ? 0 : 1,
                                   child: IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -379,12 +349,12 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         ? "Cần ít nhất 6 kí tự"
                                         : null,
                                     onChanged: (val) {
-                                      setState(() => namsinh = val as int);
+                                      setState(() => namsinh = int.parse(val));
                                     },
                                   ),
                                 ),
                                 Opacity(
-                                  opacity: !_showedit ?  0:1,
+                                  opacity: !_showedit ? 0 : 1,
                                   child: IconButton(
                                       onPressed: () {
                                         setState(() {
@@ -406,12 +376,13 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                       visible: _showedit,
                       child: Container(
                         alignment: Alignment.center,
-                        margin: EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                        margin:
+                            EdgeInsets.symmetric(horizontal: 35, vertical: 5),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children:<Widget>[
+                          children: <Widget>[
                             RaisedButton(
-                              onPressed: (){
+                              onPressed: () {
                                 setState(() {
                                   _showedit = !_showedit;
                                 });
@@ -424,56 +395,58 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                               child: Text(
                                 "HUỶ BỎ",
                                 style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.white
-                                ),
+                                    fontSize: 14,
+                                    letterSpacing: 2.2,
+                                    color: Colors.white),
                               ),
                             ),
                             RaisedButton(
-                                onPressed: (){},
-                              color: Color(0xffc5400c),
-                            padding: EdgeInsets.symmetric(horizontal: 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
-                            ),
-                              child: Text(
-                                "LƯU",
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  letterSpacing: 2.2,
-                                  color: Colors.white
-                                ),
-                              ),
-                            ),
-                          ],),
-                      ),
-                    ),
-                        Visibility(
-                          visible: !_showedit,
-                          child: Center(
-                            child: RaisedButton(
-                              onPressed: (){
-                                setState(() {
-                                  _showedit = !_showedit;
-                                });
+                              onPressed: () async {
+                                await Service(uid: uid).updateUserData(
+                                    name, namsinh, diachi, sodienthoai);
+                                successUpdateAlertDialog(context);
                               },
                               color: Color(0xffc5400c),
-                              padding: EdgeInsets.symmetric(horizontal: 40),
+                              padding: EdgeInsets.symmetric(horizontal: 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                "CHỈNH SỬA THÔNG TIN",
+                                "LƯU",
                                 style: TextStyle(
                                     fontSize: 14,
                                     letterSpacing: 2.2,
-                                    color: Colors.white
-                                ),
+                                    color: Colors.white),
                               ),
                             ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: !_showedit,
+                      child: Center(
+                        child: RaisedButton(
+                          onPressed: () {
+                            setState(() {
+                              _showedit = !_showedit;
+                            });
+                          },
+                          color: Color(0xffc5400c),
+                          padding: EdgeInsets.symmetric(horizontal: 40),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Text(
+                            "CHỈNH SỬA THÔNG TIN",
+                            style: TextStyle(
+                                fontSize: 14,
+                                letterSpacing: 2.2,
+                                color: Colors.white),
                           ),
                         ),
+                      ),
+                    ),
                   ]))
                 ],
               ),

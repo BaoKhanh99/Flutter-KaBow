@@ -122,7 +122,7 @@ class Service {
       'yearOfBirth': yob,
       'address': address,
       'phoneNumber': phoneNumber
-    });
+    }, SetOptions(merge: true));
   }
 
   // get User data

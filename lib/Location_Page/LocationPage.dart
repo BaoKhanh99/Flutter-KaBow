@@ -84,7 +84,6 @@ class _LocationPageState extends State<LocationPage> {
                           //print("object");
                         } else {
                           isFavorite = false;
-                          print("dm");
                         }
                       });
                     },

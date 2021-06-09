@@ -2,18 +2,15 @@ import 'dart:ui';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
-import 'package:kabow/Models/Location.dart';
-import 'package:kabow/Location_Page/CommentLocationPage.dart';
 import 'package:kabow/Models/LocationServices.dart';
 import 'package:kabow/Models/user.dart';
 import 'package:kabow/Service_Page/dropdownService.dart';
 import 'package:kabow/providers/ServiceProvider.dart';
+import 'package:kabow/services/Service.dart';
 import 'package:provider/provider.dart';
-import 'package:rxdart/rxdart.dart';
 
 class ServiceDetail extends StatefulWidget {
   final LocationService locationService;
@@ -134,9 +131,16 @@ class _ServiceInformationState extends State<ServiceInformation> {
   List<DropdownMenuItem<Time>> _dropdownTimeItem;
   Time _selectedTime;
 
-  ConfirmAlertDialog(BuildContext context) {
+  final myController = TextEditingController();
+
+  bool showButtonConfirm = true;
+
+  int totalPrice = 0;
+
+  confirmAlertDialog(BuildContext context) {
     final moneyFormat =
         NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
+    final auth = Provider.of<Users>(context, listen: false);
     return showDialog(
         context: context,
         builder: (context) {
@@ -145,19 +149,104 @@ class _ServiceInformationState extends State<ServiceInformation> {
               content: Text(
                   "Bạn đồng thanh toán khoản tiền ${moneyFormat.format(totalPrice)}đ ? "),
               actions: [
+                //agree
                 FlatButton(
                     color: PrimaryColor2,
-                    onPressed: () => print("Yes"),
+                    onPressed: () async {
+                      print(widget.locationService.provinceId);
+
+                      dynamic result = await Service(uid: auth.uid)
+                          .addServiceForUser(
+                              widget.locationService.id,
+                              widget.locationService.name,
+                              widget.locationService.washingMachine,
+                              widget.locationService.price,
+                              widget.locationService.images,
+                              widget.locationService.address,
+                              widget.locationService.provinceId,
+                              widget.locationService.foodService,
+                              widget.locationService.category);
+
+                      if (result == true) {
+                        return successConfirmAlertDialog(context);
+                      } else {
+                        print('aaaaaa $result');
+                        return failConfirmAlertDialog(context);
+                      }
+                    },
                     child: Text("Đồng ý")),
+
+                //cancel
                 FlatButton(
                     onPressed: () => Navigator.pop(context), child: Text("Huỷ"))
               ]);
         });
   }
 
-  SignInAlertDialog(BuildContext context) {
-    final moneyFormat =
-        NumberFormat.currency(locale: 'id', decimalDigits: 0, symbol: "");
+  successConfirmAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(title: Text("Bạn đã đặt dịch vụ thành công !"),
+              //content: Text("Bạn cần đăng nhập để thực hiện dịch vụ này "),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () {
+                      setState(() {
+                        showButtonConfirm = false;
+                      });
+
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Tiếp tục")),
+              ]);
+        });
+  }
+
+  successCancelAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(title: Text("Bạn đã huỷ dịch vụ thành công !"),
+              //content: Text("Bạn cần đăng nhập để thực hiện dịch vụ này "),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () {
+                      setState(() {
+                        showButtonConfirm = true;
+                      });
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Tiếp tục")),
+              ]);
+        });
+  }
+
+  failConfirmAlertDialog(BuildContext context) {
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text("Thao tác không thành công !"),
+              content: Text("Vui lòng thực hiện lại dịch vụ này "),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
+                    },
+                    child: Text("Tiếp tục")),
+              ]);
+        });
+  }
+
+  //Sign In alert
+  signInAlertDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (context) {
@@ -178,9 +267,91 @@ class _ServiceInformationState extends State<ServiceInformation> {
         });
   }
 
-  final myController = TextEditingController();
+  // cancel service
+  cancelServiceAlertDialog(BuildContext context) {
+    final auth = Provider.of<Users>(context, listen: false);
+    return showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+              title: Text("Xác nhận huỷ dịch vụ"),
+              content: Text("Bạn có chắn huỷ dịch vụ này?"),
+              actions: [
+                FlatButton(
+                    color: PrimaryColor2,
+                    onPressed: () async {
+                      await Service(uid: auth.uid)
+                          .deleteOoderedService(widget.locationService.id);
 
-  int totalPrice = 0;
+                      successCancelAlertDialog(context);
+                    },
+                    child: Text("Huỷ")),
+              ]);
+        });
+  }
+
+  Future<bool> aaaaa(serviceId) async {
+    final auth = Provider.of<Users>(context);
+    showButtonConfirm =
+        await Service(uid: auth.uid).checkOrderService(serviceId);
+  }
+
+  //check order
+  Widget checkOrder(int serviceId) {
+    final auth = Provider.of<Users>(context);
+    aaaaa(serviceId);
+    Size size = MediaQuery.of(context).size;
+    print('show button confirm $showButtonConfirm');
+    return (showButtonConfirm)
+        ? Center(
+            child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: size.width,
+              height: size.height * 0.05,
+              child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: PrimaryColor2,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                  onPressed: () {
+                    if (auth == null) {
+                      signInAlertDialog(context);
+                    } else {
+                      confirmAlertDialog(context);
+                    }
+                  }
+                  //kiem tra ng dung da nhap muc dich chua
+                  ,
+                  child: Text(
+                    "Xác nhận",
+                    style: TextStyle(color: BackgroundColor, fontSize: 20),
+                  )),
+            ),
+          ))
+        : Center(
+            child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              width: size.width,
+              height: size.height * 0.05,
+              child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
+                      backgroundColor: Colors.grey,
+                      shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(5)))),
+                  onPressed: () {
+                    cancelServiceAlertDialog(context);
+                  }
+                  //kiem tra ng dung da nhap muc dich chua
+                  ,
+                  child: Text(
+                    "HỦY",
+                    style: TextStyle(color: PrimaryColor, fontSize: 20),
+                  )),
+            ),
+          ));
+  }
 
   @override
   void initState() {
@@ -205,7 +376,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
   }
 
   void calculate() {
-    int room = int.parse(myController.text);
+    int room = int.tryParse(myController.text);
     int price = 0;
     if (_selectedBed.id == 1) {
       if (_selectedTime.id == 1) {
@@ -274,7 +445,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
         widget.locationService.foodService == true ? "có" : "không";
     String washingMachine =
         widget.locationService.washingMachine == true ? "có" : "không";
-    final auth = Provider.of<Users>(context);
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -430,32 +601,34 @@ class _ServiceInformationState extends State<ServiceInformation> {
           ),
 
           //confirm Button
-          Center(
-              child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Container(
-              width: size.width,
-              height: size.height * 0.05,
-              child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      backgroundColor: PrimaryColor2,
-                      shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(5)))),
-                  onPressed: () {
-                    if (auth == null) {
-                      SignInAlertDialog(context);
-                    } else {
-                      ConfirmAlertDialog(context);
-                    }
-                  }
-                  //kiem tra ng dung da nhap muc dich chua
-                  ,
-                  child: Text(
-                    "Xác nhận",
-                    style: TextStyle(color: BackgroundColor, fontSize: 20),
-                  )),
-            ),
-          ))
+          // Center(
+          //     child: Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: Container(
+          //     width: size.width,
+          //     height: size.height * 0.05,
+          //     child: OutlinedButton(
+          //         style: OutlinedButton.styleFrom(
+          //             backgroundColor: PrimaryColor2,
+          //             shape: const RoundedRectangleBorder(
+          //                 borderRadius: BorderRadius.all(Radius.circular(5)))),
+          //         onPressed: () {
+          //           if (auth == null) {
+          //             signInAlertDialog(context);
+          //           } else {
+          //             confirmAlertDialog(context);
+          //           }
+          //         }
+          //         //kiem tra ng dung da nhap muc dich chua
+          //         ,
+          //         child: Text(
+          //           "Xác nhận",
+          //           style: TextStyle(color: BackgroundColor, fontSize: 20),
+          //         )),
+          //   ),
+          // ))
+
+          checkOrder(widget.locationService.id),
         ],
       ),
     );

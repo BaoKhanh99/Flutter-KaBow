@@ -125,6 +125,7 @@ class Service {
     });
   }
 
+  // get User data
   Stream<UserData> getUserData() {
     print("uid: $uid");
     return _db
@@ -134,6 +135,7 @@ class Service {
         .map(_userDataFromSnapshot);
   }
 
+  //user data from snapshot
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     Map data = snapshot.data();
     return UserData(
@@ -144,6 +146,7 @@ class Service {
         address: data['address']);
   }
 
+  //get favorite list
   Stream<List<Location>> getFavoriteList() {
     return _db
         .collection('user')
@@ -153,8 +156,82 @@ class Service {
         .map((snapshot) =>
             snapshot.docs.map((doc) => Location.fromJson(doc.data())).toList());
   }
-}
 
-// CollectionReference col1 = Firestore.instance.collection('service');
-// final snapshots = col1.snapshots().map((snapshot) => snapshot.documents.where((doc) => doc["title"] == "Ac replaciment" || doc["title"] == "Oil Service"));
-// return (await snapshots.first).toList();
+  Future<bool> addServiceForUser(
+      int id,
+      String name,
+      bool washingMachine,
+      Map price,
+      List images,
+      Map address,
+      String provinceId,
+      bool foodService,
+      String category) async {
+    return await _db
+        .collection('user')
+        .doc(uid)
+        .collection('favorite')
+        .doc()
+        .set({
+          'id': id,
+          'name': name,
+          'washMachine': washingMachine,
+          'address': address,
+          'price': price,
+          'images': images,
+          'provinceId': provinceId,
+          'foodService': foodService,
+          'category': category,
+        }, SetOptions(merge: true))
+        .then((value) => true)
+        .catchError((onError) {
+          return false;
+        });
+  }
+
+  Future<bool> checkOrderService(
+    int id,
+  ) async {
+    bool a;
+    await _db
+        .collection('user')
+        .doc(uid)
+        .collection('favorite')
+        .where('id', isEqualTo: id)
+        .get()
+        .then((doc) {
+      if (doc.docs.isNotEmpty) {
+        print("doc from check order: ${doc.docs.length}");
+        return a = true;
+      } else {
+        return a = false;
+      }
+    });
+    print("check order service: $a");
+    return a;
+  }
+
+  Future deleteOoderedService(
+    int id,
+  ) async {
+    await _db
+        .collection('user')
+        .doc(uid)
+        .collection('favorite')
+        .where('id', isEqualTo: id)
+        .get()
+        .then((doc) {
+      doc.docs.forEach((element) {
+        _db
+            .collection('user')
+            .doc(uid)
+            .collection('favorite')
+            .doc(element.id)
+            .delete()
+            .then((value) {
+          print("cancel success + ${element.id}");
+        });
+      });
+    });
+  }
+}

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/ProfileEdit_Page.dart';
+import 'package:kabow/Account_Page/changepassword_page.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/user.dart';
@@ -114,7 +115,7 @@ class _Acount_PageState extends State<Acount_Page> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => login_page()));
+                      builder: (BuildContext context) => changepassword_page()));
                 },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -483,7 +484,7 @@ class _Acount_PageState extends State<Acount_Page> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "CHÍNH SÁCH BẢO MẬT",
+                      "THÔNG BÁO",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
@@ -531,7 +532,7 @@ class _Acount_PageState extends State<Acount_Page> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "CHÍNH SÁCH BẢO MẬT",
+                      "DỊCH VỤ ĐÃ ĐẶT",
                       style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,

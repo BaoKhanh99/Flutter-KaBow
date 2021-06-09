@@ -17,6 +17,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
   bool _ennumber = false;
   bool _enlocation = false;
   bool _ennamsinh = false;
+  bool _showedit = false;
   final AuthenService _auth = AuthenService();
   final _formKey = GlobalKey<FormState>();
   String email = "";
@@ -74,24 +75,27 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                             Positioned(
                               bottom: 0,
                               right: 0,
-                              child: Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff1b2536),
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    width: 4,
-                                    color: Theme.of(context)
-                                        .scaffoldBackgroundColor,
+                              child: Opacity(
+                                opacity: !_showedit ?  0:1,
+                                child: Container(
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                    color: Color(0xff1b2536),
+                                    shape: BoxShape.circle,
+                                    border: Border.all(
+                                      width: 4,
+                                      color: Theme.of(context)
+                                          .scaffoldBackgroundColor,
+                                    ),
                                   ),
-                                ),
-                                child: IconButton(
-                                  padding: EdgeInsets.only(left: 1),
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    Icons.edit,
-                                    color: Colors.white,
+                                  child: IconButton(
+                                    padding: EdgeInsets.only(left: 1),
+                                    onPressed: () {},
+                                    icon: Icon(
+                                      Icons.edit,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -154,13 +158,16 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                     },
                                   ),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _enname = !_enname;
-                                      });
-                                    },
-                                    icon: Icon(Icons.edit))
+                                Opacity(
+                                  opacity: !_showedit ?  0:1,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _enname = !_enname;
+                                        });
+                                      },
+                                      icon: Icon(Icons.edit)),
+                                )
                               ],
                             ),
                             SizedBox(
@@ -260,13 +267,16 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                     },
                                   ),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _ennumber = !_ennumber;
-                                      });
-                                    },
-                                    icon: Icon(Icons.edit))
+                                Opacity(
+                                  opacity: !_showedit ?  0:1,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _ennumber = !_ennumber;
+                                        });
+                                      },
+                                      icon: Icon(Icons.edit)),
+                                )
                               ],
                             ),
                             SizedBox(
@@ -315,13 +325,16 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                     },
                                   ),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _enlocation = !_enlocation;
-                                      });
-                                    },
-                                    icon: Icon(Icons.edit))
+                                Opacity(
+                                  opacity: !_showedit ?  0:1,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _enlocation = !_enlocation;
+                                        });
+                                      },
+                                      icon: Icon(Icons.edit)),
+                                )
                               ],
                             ),
                             SizedBox(
@@ -370,13 +383,16 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                     },
                                   ),
                                 ),
-                                IconButton(
-                                    onPressed: () {
-                                      setState(() {
-                                        _ennamsinh = !_ennamsinh;
-                                      });
-                                    },
-                                    icon: Icon(Icons.edit))
+                                Opacity(
+                                  opacity: !_showedit ?  0:1,
+                                  child: IconButton(
+                                      onPressed: () {
+                                        setState(() {
+                                          _ennamsinh = !_ennamsinh;
+                                        });
+                                      },
+                                      icon: Icon(Icons.edit)),
+                                )
                               ],
                             ),
                             SizedBox(
@@ -386,24 +402,78 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                         ),
                       ),
                     ),
-                    Center(
-                      child: RaisedButton(
-                        onPressed: () {},
-                        color: Color(0xffc5400c),
-                        padding: EdgeInsets.symmetric(horizontal: 100),
-                        elevation: 2,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(15)),
-                        child: Text(
-                          "LƯU",
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.white,
-                            letterSpacing: 2.2,
+                    Visibility(
+                      visible: _showedit,
+                      child: Container(
+                        alignment: Alignment.center,
+                        margin: EdgeInsets.symmetric(horizontal: 35, vertical: 5),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children:<Widget>[
+                            RaisedButton(
+                              onPressed: (){
+                                setState(() {
+                                  _showedit = !_showedit;
+                                });
+                              },
+                              color: Color(0xff1b2536),
+                              padding: EdgeInsets.symmetric(horizontal: 40),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                "HUỶ BỎ",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  letterSpacing: 2.2,
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                            RaisedButton(
+                                onPressed: (){},
+                              color: Color(0xffc5400c),
+                            padding: EdgeInsets.symmetric(horizontal: 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                              child: Text(
+                                "LƯU",
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  letterSpacing: 2.2,
+                                  color: Colors.white
+                                ),
+                              ),
+                            ),
+                          ],),
+                      ),
+                    ),
+                        Visibility(
+                          visible: !_showedit,
+                          child: Center(
+                            child: RaisedButton(
+                              onPressed: (){
+                                setState(() {
+                                  _showedit = !_showedit;
+                                });
+                              },
+                              color: Color(0xffc5400c),
+                              padding: EdgeInsets.symmetric(horizontal: 40),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: Text(
+                                "CHỈNH SỬA THÔNG TIN",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    letterSpacing: 2.2,
+                                    color: Colors.white
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    )
                   ]))
                 ],
               ),

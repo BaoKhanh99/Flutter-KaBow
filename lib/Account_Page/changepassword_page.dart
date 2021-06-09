@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/login_page.dart';
+import 'package:kabow/Models/user.dart';
+import 'package:provider/provider.dart';
 class changepassword_page extends StatefulWidget{
   _changepasswordState createState() => _changepasswordState();
 }
@@ -8,6 +10,7 @@ class _changepasswordState extends State<changepassword_page>{
   Widget build(BuildContext context) {
     bool isVisible =true;
     Size size = MediaQuery.of(context).size;
+    String uid = Provider.of<Users>(context).uid;
     // TODO: implement build
     return Scaffold(
       body: CustomScrollView(
@@ -55,7 +58,7 @@ class _changepasswordState extends State<changepassword_page>{
                 child: Container(
                     child:RaisedButton(
                       onPressed: (){},
-                      color: Color(0xff1b2536),
+                      color: Color(0xffc5400c),
                       padding:  EdgeInsets.symmetric(horizontal: 80),
                       elevation: 2,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),

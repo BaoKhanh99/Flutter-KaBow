@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
 import 'package:kabow/Models/user.dart';
 import 'package:kabow/services/Service.dart';
@@ -19,7 +22,6 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
   bool _enlocation = false;
   bool _ennamsinh = false;
   bool _showedit = false;
-  final AuthenService _auth = AuthenService();
   final _formKey = GlobalKey<FormState>();
   String email = "";
   String name = "";
@@ -27,6 +29,9 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
   String diachi = "";
   String error = "";
   int namsinh = 1990;
+
+  PickedFile imageFile;
+  ImagePicker imagePicker = ImagePicker();
 
   successUpdateAlertDialog(BuildContext context) {
     return showDialog(
@@ -44,6 +49,11 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                     child: Text("Tiếp tục")),
               ]);
         });
+  }
+
+  _openGallary() async {
+    imageFile = await imagePicker.getImage(source: ImageSource.gallery);
+    File(imageFile.path);
   }
 
   @override
@@ -111,7 +121,11 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                   ),
                                   child: IconButton(
                                     padding: EdgeInsets.only(left: 1),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      setState(() {
+                                        _openGallary();
+                                      });
+                                    },
                                     icon: Icon(
                                       Icons.edit,
                                       color: Colors.white,

@@ -168,7 +168,6 @@ class _ServiceInformationState extends State<ServiceInformation> {
                       if (result == true) {
                         return successConfirmAlertDialog(context);
                       } else {
-                        print('aaaaaa $result');
                         return failConfirmAlertDialog(context);
                       }
                     },
@@ -265,6 +264,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
         });
   }
 
+  //cancel service
   cancelServiceAlertDialog(BuildContext context) {
     final auth = Provider.of<Users>(context, listen: false);
     return showDialog(
@@ -293,63 +293,96 @@ class _ServiceInformationState extends State<ServiceInformation> {
 
     Size size = MediaQuery.of(context).size;
 
-    return FutureBuilder<bool>(
-        future: Service(uid: auth.uid).checkOrderService(serviceId),
-        builder: (context, snapshot) {
-          showButtonConfirm = !snapshot.data;
-          return (showButtonConfirm)
-              ? Center(
-                  child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: size.width,
-                    height: size.height * 0.05,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: PrimaryColor2,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)))),
-                        onPressed: () {
-                          if (auth == null) {
-                            signInAlertDialog(context);
-                          } else {
-                            confirmAlertDialog(context);
+    //if uid == null then return non user service page
+    if (auth != null) {
+      print("uid null");
+      return FutureBuilder<bool>(
+          future: Service(uid: auth.uid).checkOrderService(serviceId),
+          builder: (context, snapshot) {
+            showButtonConfirm = !snapshot.data;
+            return (showButtonConfirm)
+                ? Center(
+                    child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: size.width,
+                      height: size.height * 0.05,
+                      child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: PrimaryColor2,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)))),
+                          onPressed: () {
+                            if (auth == null) {
+                              signInAlertDialog(context);
+                            } else {
+                              confirmAlertDialog(context);
+                            }
                           }
-                        }
-                        //kiem tra ng dung da nhap muc dich chua
-                        ,
-                        child: Text(
-                          "Xác nhận",
-                          style:
-                              TextStyle(color: BackgroundColor, fontSize: 20),
-                        )),
-                  ),
-                ))
-              : Center(
-                  child: Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    width: size.width,
-                    height: size.height * 0.05,
-                    child: OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            backgroundColor: Colors.grey,
-                            shape: const RoundedRectangleBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5)))),
-                        onPressed: () {
-                          cancelServiceAlertDialog(context);
-                        }
-                        //kiem tra ng dung da nhap muc dich chua
-                        ,
-                        child: Text(
-                          "HỦY",
-                          style: TextStyle(color: PrimaryColor, fontSize: 20),
-                        )),
-                  ),
-                ));
-        });
+                          //kiem tra ng dung da nhap muc dich chua
+                          ,
+                          child: Text(
+                            "Xác nhận",
+                            style:
+                                TextStyle(color: BackgroundColor, fontSize: 20),
+                          )),
+                    ),
+                  ))
+                : Center(
+                    child: Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Container(
+                      width: size.width,
+                      height: size.height * 0.05,
+                      child: OutlinedButton(
+                          style: OutlinedButton.styleFrom(
+                              backgroundColor: Colors.grey,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(5)))),
+                          onPressed: () {
+                            cancelServiceAlertDialog(context);
+                          }
+                          //kiem tra ng dung da nhap muc dich chua
+                          ,
+                          child: Text(
+                            "HỦY",
+                            style: TextStyle(color: PrimaryColor, fontSize: 20),
+                          )),
+                    ),
+                  ));
+          });
+    } else {
+      return Center(
+          child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Container(
+          width: size.width,
+          height: size.height * 0.05,
+          child: OutlinedButton(
+              style: OutlinedButton.styleFrom(
+                  backgroundColor: PrimaryColor2,
+                  shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(5)))),
+              onPressed: () {
+                if (auth == null) {
+                  signInAlertDialog(context);
+                } else {
+                  confirmAlertDialog(context);
+                }
+              }
+              //kiem tra ng dung da nhap muc dich chua
+              ,
+              child: Text(
+                "Xác nhận",
+                style: TextStyle(color: BackgroundColor, fontSize: 20),
+              )),
+        ),
+      ));
+    }
+
+    //else return payment service page
   }
 
   @override
@@ -395,6 +428,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
     });
   }
 
+  //list dropdown bed
   List<DropdownMenuItem<Bed>> buildDropdownBedItem(List beds) {
     List<DropdownMenuItem<Bed>> items = List();
     for (Bed bed in beds) {
@@ -409,6 +443,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
     return items;
   }
 
+  //list dropdown time
   List<DropdownMenuItem<Time>> buildDropdownTimeItem(List alltime) {
     List<DropdownMenuItem<Time>> items = List();
     for (Time time in alltime) {
@@ -423,12 +458,14 @@ class _ServiceInformationState extends State<ServiceInformation> {
     return items;
   }
 
+  // bed dropdown function when clicked
   onChangeDropdownBedItem(Bed selectedBed) {
     setState(() {
       _selectedBed = selectedBed;
     });
   }
 
+  // time dropdown function when clicked
   onChangeDropdownTimeItem(Time selectedTime) {
     setState(() {
       _selectedTime = selectedTime;
@@ -634,6 +671,7 @@ class _ServiceInformationState extends State<ServiceInformation> {
   }
 }
 
+//recommend service
 class ServiceRecommended extends StatefulWidget {
   final String provinceId;
   final int id;

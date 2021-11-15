@@ -58,4 +58,7 @@ class AuthenService {
 //   var authresult = await firebaseUser.reauthenticateWithCredential(authCredentials);
 //   authresult.user != null;
 //  }
+  Future sendPasswordResetEmail(String email) async{
+    return _auth.sendPasswordResetEmail(email: email);
+  }
 }

@@ -123,7 +123,7 @@ class _Acount_PageState extends State<Acount_Page> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "ĐỔI MẬT KHẨU",
+                        "ĐẶT LẠI MẬT KHẨU",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.w500,

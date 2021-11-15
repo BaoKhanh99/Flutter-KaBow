@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:kabow/Account_Page/login_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
@@ -159,20 +160,25 @@ class _registerpageState extends State<register_page> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
+                                    title: Text("ĐĂNG KÍ THÀNH CÔNG!"),
                                     content: Text(
-                                      "ĐĂNG NHẬP THÀNH CÔNG",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold),
+                                      "QUAY LẠI TRANG TÀI KHOẢN?",
+//                                      style: TextStyle(
+//                                          fontWeight: FontWeight.bold),
                                     ),
                                     actions: [
                                       FlatButton(
-                                        color: PrimaryColor2,
+                                          onPressed: () => Navigator.pop(context),
+                                          child: Text("Không"),
+                                      ),
+                                      FlatButton(
+                                        //color: PrimaryColor2,
                                         onPressed: () {
                                           Navigator.of(context).pop();
                                           Navigator.of(context).pop();
                                           Navigator.of(context).pop();
                                         },
-                                        child: Text("Tiếp tục"),
+                                        child: Text("Có",),
                                       ),
                                     ],
                                   );

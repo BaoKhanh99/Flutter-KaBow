@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kabow/Account_Page/changepassword_page.dart';
 import 'package:kabow/Account_Page/getpassword_page.dart';
 import 'package:kabow/Account_Page/register_page.dart';
 import 'package:kabow/Colors/ProjectColor.dart';
@@ -186,7 +187,7 @@ class _loginpageState extends State<login_page> {
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (BuildContext context) =>
-                              getpassword_page()));
+                              changepassword_page()));
                     },
                     child: Text(
                       "Quên mật khẩu ?",

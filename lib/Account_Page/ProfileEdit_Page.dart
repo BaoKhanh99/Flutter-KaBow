@@ -36,7 +36,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
               //content: Text("Bạn cần đăng nhập để thực hiện dịch vụ này "),
               actions: [
                 FlatButton(
-                    color: PrimaryColor2,
+                    //color: PrimaryColor2,
                     onPressed: () {
                       setState(() {});
                       Navigator.of(context).pop();
@@ -202,7 +202,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                   child: TextFormField(
                                     enabled: _ennumber,
                                     decoration: InputDecoration(
-                                      hintText: "${userData.phoneNumber}",
+                                      hintText: "0${userData.phoneNumber}",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       labelText: "Số điện thoại",
@@ -393,7 +393,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Text(
-                                "HUỶ BỎ",
+                                "QUAY LẠI",
                                 style: TextStyle(
                                     fontSize: 14,
                                     letterSpacing: 2.2,

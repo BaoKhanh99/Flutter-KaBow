@@ -154,7 +154,7 @@ class _registerpageState extends State<register_page> {
                                   email, password, name);
                           if (result == null) {
                             setState(
-                                () => error = "Đinh dạng email không đúng!");
+                                () => error = "Đinh dạng không đúng!");
                           } else {
                             return showDialog(
                                 context: context,

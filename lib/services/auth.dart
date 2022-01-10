@@ -6,6 +6,7 @@ import 'package:kabow/services/Service.dart';
 
 class AuthenService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  UserData mockUser = new UserData();
 
   Users _userFromFirebaseUser(User user) {
     return user != null ? Users(uid: user.uid) : null;
@@ -24,7 +25,8 @@ class AuthenService {
         password: password,
       );
       User user = result.user;
-      await Service(uid: user.uid).updateUserData(name, 1990, 'address', 0);
+      mockUser.name=name;
+      await Service(uid: user.uid).updateUserData(mockUser);
       return _userFromFirebaseUser(user);
     } catch (e) {}
   }

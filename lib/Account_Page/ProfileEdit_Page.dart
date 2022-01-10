@@ -16,19 +16,15 @@ class ProfileEdit_page extends StatefulWidget {
 }
 
 class ProfileEdit_pageState extends State<ProfileEdit_page> {
-  bool _enemail = false;
   bool _enname = false;
   bool _ennumber = false;
   bool _enlocation = false;
   bool _ennamsinh = false;
   bool _showedit = false;
   final _formKey = GlobalKey<FormState>();
-  String email = "";
-  String name = "";
-  int sodienthoai = 0123456789;
-  String diachi = "";
-  String error = "";
-  int namsinh = 1990;
+  UserData user = new UserData();
+  bool flag = false;
+
 
   PickedFile imageFile;
   ImagePicker imagePicker = ImagePicker();
@@ -61,12 +57,23 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
     // TODO: implement build
     Size size = MediaQuery.of(context).size;
     String uid = Provider.of<Users>(context).uid;
+    //fetch data from firebase
     return StreamBuilder(
       stream: Service(uid: uid).getUserData(),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          UserData userData = snapshot.data;
-          if (userData != null) {
+          UserData userDataResponse = snapshot.data;
+          if(!flag){
+            user = userDataResponse;
+            flag =true;
+          }
+
+
+//          name = "${userDataResponse.name}";
+//          yob = int.parse("${userDataResponse.yob}");
+//          address = "${userDataResponse.address}";
+//          phonenumber = int.parse("${userDataResponse.phoneNumber}");
+          if (userDataResponse != null) {
             return Scaffold(
               body: CustomScrollView(
                 slivers: [
@@ -156,9 +163,10 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                 SizedBox(
                                   width: size.width * 0.7,
                                   child: TextFormField(
+                                    initialValue: "${userDataResponse.name}",
                                     enabled: _enname,
                                     decoration: InputDecoration(
-                                      hintText: "${userData.name}",
+                                      hintText: "${userDataResponse.name}",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       labelText: "Họ và tên",
@@ -188,7 +196,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         ? "Cần ít nhất 6 kí tự"
                                         : null,
                                     onChanged: (val) {
-                                      setState(() => name = val);
+                                      setState(() => user.name = val);
                                     },
                                   ),
                                 ),
@@ -214,9 +222,10 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                 SizedBox(
                                   width: size.width * 0.7,
                                   child: TextFormField(
+                                    initialValue: "${userDataResponse.phoneNumber}",
                                     enabled: _ennumber,
                                     decoration: InputDecoration(
-                                      hintText: "0${userData.phoneNumber}",
+                                      hintText: "0${userDataResponse.phoneNumber}",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       labelText: "Số điện thoại",
@@ -247,7 +256,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         : null,
                                     onChanged: (val) {
                                       setState(
-                                          () => sodienthoai = int.parse(val));
+                                          () => user.phoneNumber = int.parse(val));
                                     },
                                   ),
                                 ),
@@ -273,9 +282,10 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                 SizedBox(
                                   width: size.width * 0.7,
                                   child: TextFormField(
+                                    initialValue: "${userDataResponse.address}",
                                     enabled: _enlocation,
                                     decoration: InputDecoration(
-                                      hintText: "${userData.address}",
+                                      hintText: "${userDataResponse.address}",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       labelText: "Địa chỉ",
@@ -305,7 +315,7 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         ? "Cần ít nhất 6 kí tự"
                                         : null,
                                     onChanged: (val) {
-                                      setState(() => diachi = val);
+                                      setState(() => user.address = val);
                                     },
                                   ),
                                 ),
@@ -331,9 +341,10 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                 SizedBox(
                                   width: size.width * 0.7,
                                   child: TextFormField(
+                                    initialValue: "${userDataResponse.yob}",
                                     enabled: _ennamsinh,
                                     decoration: InputDecoration(
-                                      hintText: "${userData.yob}",
+                                      hintText: "${userDataResponse.yob}",
                                       floatingLabelBehavior:
                                           FloatingLabelBehavior.always,
                                       labelText: "Năm sinh",
@@ -359,11 +370,14 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                                         ),
                                       ),
                                     ),
-                                    validator: (val) => val.length < 6
+                                    validator: (val) => val.length < 4
                                         ? "Cần ít nhất 6 kí tự"
                                         : null,
                                     onChanged: (val) {
-                                      setState(() => namsinh = int.parse(val));
+                                      print('====== $val');
+//                                      user.yob = int.parse(val);
+                                      setState(() => user.yob = int.parse(val));
+                                      print('${user.yob}');
                                     },
                                   ),
                                 ),
@@ -416,8 +430,18 @@ class ProfileEdit_pageState extends State<ProfileEdit_page> {
                             ),
                             RaisedButton(
                               onPressed: () async {
+//                                print(yob);
+//                                print(name);
+//                                print(phonenumber);
+//                                print(address);
+//                                if(_formKey.currentState.validate()){
+//                                      await Service(uid: uid).updateUserData(
+//                                          name, yob, address, phonenumber);
+//                                      successUpdateAlertDialog(context);
+//                                }
+                                print('===+++++++++ ${user.toString()}');
                                 await Service(uid: uid).updateUserData(
-                                    name, namsinh, diachi, sodienthoai);
+                                    user);
                                 successUpdateAlertDialog(context);
                               },
                               color: Color(0xffc5400c),

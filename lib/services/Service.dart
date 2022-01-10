@@ -116,12 +116,12 @@ class Service {
 
   //update user data
   Future updateUserData(
-      String name, int yob, String address, int phoneNumber) async {
+      UserData userData) async {
     return await _db.collection('user').doc(uid).set({
-      'name': name,
-      'yearOfBirth': yob,
-      'address': address,
-      'phoneNumber': phoneNumber,
+      'name': userData.name,
+      'yearOfBirth': userData.yob,
+      'address': userData.address,
+      'phoneNumber': userData.phoneNumber,
     });
   }
 
